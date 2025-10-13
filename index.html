@@ -1,46 +1,272 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <title>Page Title</title>
-    <style>
-        body{
-            background-color: red; height: 100%;
-        }
-        header{
-            background-color: black; height: 50px;
-        }
-        main {
-            background-color: green; height: 100vh;
-        }
-        footer{
-            background-color: blue; height: 50px;
-        }
-        .card123{
-            height: 500px;
-            display: grid; grid-template-columns: 1fr 1fr;
-        }
-        .dongchon{
-            height: 20%;
-            border: 1px solid black;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>동촌신협</title>
+  <style>
+    :root{
+      --brand1:#2A7BF6;
+      --brand2:#0D56E2;
+      --ink:#111;
+      --muted:#6b7280;
+      --radius:18px;
+      --shadow:0 10px 24px rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;
+      font-family:'Noto Sans KR',Pretendard,Segoe UI,Roboto,sans-serif;
+      background:#f6f8fc;
+      color:var(--ink);
+    }
+    a{text-decoration:none;color:inherit}
+
+    /* ===== 헤더 (크기/타이포 키움) ===== */
+    header{
+      background:linear-gradient(180deg,var(--brand1),var(--brand2));
+      padding: 20px 22px 20px;
+      color:#fff; text-align:left; position:relative;
+    }
+    .header-row{display:flex;align-items:center;gap:18px}
+    .title-wrap h1{
+      margin:0; font-size:34px;      /* ⬆️ 제목 크게 */
+      font-weight:900; letter-spacing:-.2px;
+    }
+    .title-wrap p{
+      margin:8px 0 0; font-size:18px;/* ⬆️ 부제 크게 */
+      color:#eaf1ff; font-weight:600;
+    }
+
+    /* ===== 로고 + 눈동자 (더 큼, 영역 밖으로 안나감) ===== */
+    .logo-eye{
+      position:relative;
+      width:126px;                   /* ⬆️ 로고 더 크게 (원하면 120~140px) */
+      aspect-ratio:1/1;
+      overflow:hidden;               /* ✅ 눈이 컨테이너 밖으로 안 보이게 */
+    }
+    .logo-eye img{width:100%;height:auto;display:block}
+    .pupil{
+      position:absolute;
+      width:5px; height:5px;         /* 👀 더 작게 */
+      background:#111; border-radius:50%;
+      box-shadow:0 0 0 2px #fff;     /* 흰 테두리로 선명하게 */
+      transform:translate(-50%,-50%);
+      pointer-events:none;
+    }
+    /* ✅ 돼지 눈의 ‘기본 중심’(퍼센트) — 필요 시 1% 단위 미세조정 */
+    .pupil-left  { left: 43%; top: 38.5%; }
+    .pupil-right { left: 57%; top: 38.5%; }
+    /* 👇 최대 이동 반경(px): 얼굴 벗어나지 않게 아주 작게 */
+    .logo-eye{ --pupil-range: 3px; }
+
+    /* ===== 메인 레이아웃 ===== */
+    main{ max-width:960px; margin:-48px auto 100px; padding:0 16px; }
+    .section-title{ font-size:20px; font-weight:800; margin:10px 4px 14px; }
+
+    /* 카드 */
+    .card-list{display:flex;flex-direction:column;gap:16px;}
+    .card{
+      display:flex; align-items:center; justify-content:space-between;
+      min-height:120px; padding:24px 22px; border-radius:var(--radius);
+      box-shadow:var(--shadow); color:#fff; position:relative; overflow:hidden;
+      transition:transform .15s ease,filter .15s ease;
+    }
+    .card:hover{transform:translateY(-2px);filter:saturate(1.05)}
+    .text{max-width:78%}
+    .kicker{opacity:.9;font-size:13px;margin-bottom:6px}
+    .title{font-size:20px;font-weight:800;line-height:1.25;letter-spacing:-.2px}
+    .emoji{font-size:46px;opacity:.95}
+    .cta{position:absolute;right:20px;bottom:16px;font-size:22px;opacity:.8}
+
+    .c1{background:linear-gradient(90deg,#3BA0FF,#2F78F6);}
+    .c2{background:linear-gradient(90deg,#10B2B7,#0E7E83);}
+    .c3{background:linear-gradient(90deg,#0F5AD4,#073A8F);}
+    .c4{background:linear-gradient(90deg,#4696FF,#2A7BF6);}
+
+    /* 포인트 조회 박스 */
+    .query-wrap{ margin-top:28px; padding:16px; background:#fff; border-radius:var(--radius); box-shadow:var(--shadow) }
+    .query-wrap h2{ margin:4px 0 14px; font-size:18px; font-weight:800 }
+    .form-row{ display:flex; gap:12px; flex-wrap:wrap }
+    .input{
+      flex:1 1 220px; background:#f3f6fd; border:1px solid #e3e8f4; border-radius:12px;
+      padding:12px 14px; font-size:16px; outline:none;
+    }
+    .input:focus{ border-color:#b9c8ff; box-shadow:0 0 0 4px rgba(46,113,255,.12) }
+    .btn{
+      flex:0 0 140px; background:linear-gradient(180deg,var(--brand1),var(--brand2));
+      color:#fff; border:0; border-radius:12px; padding:12px 16px; font-weight:700; font-size:16px; cursor:pointer; box-shadow:var(--shadow)
+    }
+    .agree{ display:flex; align-items:center; gap:8px; margin-top:10px; font-size:13px; color:#374151 }
+    .helper{ margin-top:8px; color:var(--muted); font-size:13px }
+
+    /* 하단 탭 */
+    .tabbar{
+      position:fixed; left:0; right:0; bottom:0; background:#fff; border-top:1px solid #e9eef6;
+      display:flex; justify-content:space-around; gap:6px; padding:10px 6px 12px; z-index:20
+    }
+    .tab{ display:flex; flex-direction:column; align-items:center; gap:4px; color:#4b5563; font-size:11px }
+    .tab .ico{ font-size:20px }
+    .tab.active{ color:var(--brand2); font-weight:700 }
+
+    @media(max-width:520px){
+      .title-wrap h1{font-size:28px}
+      .title-wrap p{font-size:16px}
+      .logo-eye{width:112px}
+      .card{min-height:100px; padding:18px}
+      .title{font-size:18px}
+      .emoji{font-size:38px}
+    }
+  </style>
 </head>
-
 <body>
-    <header>
-        
 
-    </header>
-    <main>
-        <div class="card123"> 
-            <div class="dongchon">
-      
-            </div>
+  <header>
+    <div class="header-row">
+      <div class="logo-eye" id="logoEye">
+        <img src="라이프온로고2.gif" alt="라이프온 로고">
+        <span class="pupil pupil-left"></span>
+        <span class="pupil pupil-right"></span>
+      </div>
+      <div class="title-wrap">
+        <h1>동촌신협</h1>
+        <p>우리 동네 나침반</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="section-title">동촌신협을 거래하면 좋은 점</div>
+    <div class="card-list">
+      <div class="card c1">
+        <div class="text">
+          <div class="kicker">좋은 점 ①</div>
+          <div class="title">공란 추후 입력 예정</div>
         </div>
-    </main>
-    <footer>
+        <div class="emoji">📅</div>
+        <div class="cta">→</div>
+      </div>
 
-    </footer>
+      <div class="card c2">
+        <div class="text">
+          <div class="kicker">좋은 점 ②</div>
+          <div class="title">공란 추후 입력 예정</div>
+        </div>
+        <div class="emoji">🐷</div>
+        <div class="cta">→</div>
+      </div>
+
+      <div class="card c3">
+        <div class="text">
+          <div class="kicker">좋은 점 ③</div>
+          <div class="title">공란 추후 입력 예정</div>
+        </div>
+        <div class="emoji">💰</div>
+        <div class="cta">→</div>
+      </div>
+
+      <div class="card c4">
+        <div class="text">
+          <div class="kicker">좋은 점 ④</div>
+          <div class="title">공란 추후 입력 예정</div>
+        </div>
+        <div class="emoji">🏦</div>
+        <div class="cta">→</div>
+      </div>
+    </div>
+
+    <!-- 포인트 조회 영역 -->
+    <div class="query-wrap" id="point-query">
+      <h2>조합원 포인트 조회</h2>
+      <form id="lookupForm">
+        <div class="form-row">
+          <input class="input" type="text" id="name" name="name" placeholder="성함" required />
+          <input class="input" type="tel" id="phone" name="phone" placeholder="연락처 (숫자만)" inputmode="numeric" maxlength="11" required />
+          <button class="btn" type="submit">조회하기</button>
+        </div>
+        <label class="agree">
+          <input type="checkbox" id="agree" required />
+          개인정보(성명/연락처) 조회에 동의합니다.
+        </label>
+        <div class="helper">※ 실제 조회 연동은 추후 연결됩니다.</div>
+      </form>
+    </div>
+  </main>
+
+  <!-- 하단 탭 -->
+  <nav class="tabbar">
+    <div class="tab active"><div class="ico">🏠</div>홈</div>
+    <div class="tab"><div class="ico">🎁</div>혜택</div>
+    <div class="tab"><div class="ico">📦</div>상품</div>
+    <div class="tab"><div class="ico">🔔</div>공지</div>
+    <div class="tab"><div class="ico">🔍</div>전체</div>
+  </nav>
+
+  <!-- 눈동자 트래킹: 작은 반경 + 영역 이탈 방지 + 중앙 복귀 -->
+  <script>
+  (function(){
+    const box = document.getElementById('logoEye');
+    if(!box) return;
+
+    const pupils = [ box.querySelector('.pupil-left'), box.querySelector('.pupil-right') ];
+    const range = parseFloat(getComputedStyle(box).getPropertyValue('--pupil-range')) || 3;
+
+    function centersPx(){
+      const rect = box.getBoundingClientRect();
+      return pupils.map(p=>{
+        const cs = getComputedStyle(p);
+        return {
+          x: (parseFloat(cs.left)/100) * rect.width,
+          y: (parseFloat(cs.top)/100)  * rect.height
+        };
+      });
+    }
+
+    let centers = centersPx();
+    let target = {dx:0, dy:0};
+    let current = {dx:0, dy:0};
+
+    function onMove(e){
+      const r = box.getBoundingClientRect();
+      // 헤더 내에서만 좌표 계산 & 박스 범위로 클램프
+      const mx = Math.min(Math.max(e.clientX - r.left, 0), r.width);
+      const my = Math.min(Math.max(e.clientY - r.top,  0), r.height);
+
+      const cx = r.width/2, cy = r.height/2;
+      let dx = (mx - cx) / (r.width/2);
+      let dy = (my - cy) / (r.height/2);
+
+      // 길이 1로 제한(오버슈트 방지)
+      const len = Math.hypot(dx, dy) || 1; dx/=len; dy/=len;
+
+      target.dx = dx * range;
+      target.dy = dy * range;
+    }
+
+    function resetToCenter(){ target.dx = 0; target.dy = 0; }
+
+    function tick(){
+      const ease = 0.22; // 작을수록 더 부드럽게
+      current.dx += (target.dx - current.dx) * ease;
+      current.dy += (target.dy - current.dy) * ease;
+
+      centers = centersPx();
+      pupils.forEach((p,i)=>{
+        p.style.left = (centers[i].x + current.dx) + 'px';
+        p.style.top  = (centers[i].y + current.dy) + 'px';
+      });
+
+      requestAnimationFrame(tick);
+    }
+
+    const header = document.querySelector('header') || document.body;
+    header.addEventListener('mousemove', onMove);
+    header.addEventListener('mouseleave', resetToCenter);
+    window.addEventListener('resize', ()=>{ centers = centersPx(); });
+
+    tick();
+  })();
+  </script>
 
 </body>
 </html>
