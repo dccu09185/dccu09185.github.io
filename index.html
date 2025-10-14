@@ -5,26 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>동촌신협</title>
   <style>
-    :root{
-      --brand1:#2A7BF6; --brand2:#0D56E2; --ink:#111; --muted:#6b7280;
-      --radius:18px; --shadow:0 10px 24px rgba(0,0,0,.08);
-    }
+    :root{ --brand1:#2A7BF6; --brand2:#0D56E2; --ink:#111; --muted:#6b7280;
+      --radius:18px; --shadow:0 10px 24px rgba(0,0,0,.08); }
     *{box-sizing:border-box}
-    html,body{margin:0; font-family:'Noto Sans KR',Pretendard,Segoe UI,Roboto,sans-serif; background:#f6f8fc; color:var(--ink);}
+    html,body{margin:0;font-family:'Noto Sans KR',Pretendard,Segoe UI,Roboto,sans-serif;background:#f6f8fc;color:var(--ink)}
     a{text-decoration:none;color:inherit}
 
     /* ===== 헤더 ===== */
-    header{
-      background:linear-gradient(180deg,var(--brand1),var(--brand2));
-      padding:20px 20px 2%; color:#fff; text-align:left; position:relative;
-    }
+    header{background:linear-gradient(180deg,var(--brand1),var(--brand2));padding:20px 20px 2%;color:#fff;position:relative;}
     .header-row{display:flex;align-items:center;gap:18px}
-    .title-wrap h1{margin:0; font-size:34px; font-weight:900; letter-spacing:-.2px;}
-    .title-wrap p{margin:6px 0 0; font-size:16px; color:#eaf1ff; font-weight:600;}
-    .logo-eye{width:110px; aspect-ratio:1/1; overflow:hidden;}
-    .logo-eye img{width:100%; display:block}
+    .logo-eye{width:110px;aspect-ratio:1/1;overflow:hidden}
+    .logo-eye img{width:100%;display:block}
+    .title-wrap h1{margin:0;font-size:34px;font-weight:900;letter-spacing:-.2px}
+    .title-wrap p{margin:6px 0 0;font-size:16px;color:#eaf1ff;font-weight:600}
 
-    /* ===== 메인 ===== */
+    /* ===== 메인 카드 ===== */
     main{max-width:960px;margin:16px auto 110px;padding:0 16px}
     .card-list{display:flex;flex-direction:column;gap:16px}
     .card{
@@ -34,80 +29,97 @@
       transition:transform .15s ease,filter .15s ease
     }
     .card:hover{transform:translateY(-2px);filter:saturate(1.05)}
-    .text{max-width:72%;display:flex;flex-direction:column;justify-content:center;}
+    .text{max-width:72%;display:flex;flex-direction:column;justify-content:center}
     .kicker{opacity:.9;font-size:13px;margin-bottom:6px}
     .title{font-size:20px;font-weight:800;line-height:1.25;letter-spacing:-.2px}
     .cta-row{margin-top:10px;font-size:20px;opacity:.9}
-    .emoji{display:flex;justify-content:flex-end;align-items:center;margin-left:12px;}
+    .emoji{display:flex;justify-content:flex-end;align-items:center;margin-left:12px}
     .emoji img{width:54px;display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,.15))}
     .c1{background:linear-gradient(90deg,#3BA0FF,#2F78F6)}
     .c2{background:linear-gradient(90deg,#10B2B7,#0E7E83)}
     .c3{background:linear-gradient(90deg,#0F5AD4,#073A8F)}
     .c4{background:linear-gradient(90deg,#4696FF,#2A7BF6)}
 
-    /* ===== 포인트 조회 ===== */
-    .query-wrap{margin-top:28px;padding:16px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow)}
-    .query-wrap h2{margin:4px 0 14px;font-size:18px;font-weight:800}
-    .form-row{display:flex;gap:12px;flex-wrap:wrap}
-    .input{flex:1 1 220px;background:#f3f6fd;border:1px solid #e3e8f4;border-radius:12px;padding:12px 14px;font-size:16px;outline:none}
-    .input:focus{border-color:#b9c8ff;box-shadow:0 0 0 4px rgba(46,113,255,.12)}
-    .btn{flex:0 0 140px;background:linear-gradient(180deg,var(--brand1),var(--brand2));color:#fff;border:0;border-radius:12px;padding:12px 16px;font-weight:700;font-size:16px;cursor:pointer;box-shadow:var(--shadow)}
-    .agree{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:13px;color:#374151}
-    .helper{margin-top:8px;color:var(--muted);font-size:13px}
+    /* ===== 체크카드 캐러셀 ===== */
+    .shelf-wrap{margin-top:28px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}
+    .shelf-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+    .shelf-head h2{margin:0;font-size:18px;font-weight:800}
+    .shelf-ctrl{display:flex;gap:8px}
+    .shelf-btn{
+      width:36px;height:36px;border-radius:10px;border:1px solid #e6ecff;background:#f7faff;
+      display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.06)
+    }
+    .shelf-btn:active{transform:translateY(1px)}
+    .shelf{
+      display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,1fr);
+      gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;
+    }
+    .shelf::-webkit-scrollbar{height:8px}
+    .shelf::-webkit-scrollbar-thumb{background:#e6ecff;border-radius:10px}
+    .shelf-card{
+      scroll-snap-align:start;border:1px solid #e8ecf5;border-radius:16px;overflow:hidden;
+      background:#fff;box-shadow:0 6px 16px rgba(0,0,0,.06)
+    }
+    .shelf-card__img{
+      height:140px;background:#eef2f9;display:grid;place-items:center;
+      color:#6b7280;font-size:13px;letter-spacing:.2px
+      /* 나중에 실제 이미지 넣을 땐 아래처럼:
+         background:#eef2f9 url('이미지경로') center/cover no-repeat; color:transparent; */
+    }
+    .shelf-card__body{padding:12px}
+    .shelf-card__title{font-weight:800}
+    .shelf-card__desc{font-size:13px;color:#64748b;margin-top:4px}
+    .shelf-card a{display:block}
+    .shelf-card:hover{transform:translateY(-2px);transition:.15s ease}
 
     /* ===== 하단 탭 ===== */
-    .tabbar{
-      position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #e9eef6;
-      display:flex;justify-content:space-around;gap:6px;padding:10px 6px 12px;z-index:20
-    }
-    .tab{display:flex;flex-direction:column;align-items:center;gap:6px;color:#4b5563;font-size:12px;cursor:pointer;}
+    .tabbar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #e9eef6;
+      display:flex;justify-content:space-around;gap:6px;padding:10px 6px 12px;z-index:20}
+    .tab{display:flex;flex-direction:column;align-items:center;gap:6px;color:#4b5563;font-size:12px;cursor:pointer}
     .tab.active{color:var(--brand2);font-weight:700}
-    .tab--img .ico{width:40px;height:40px;display:grid;place-items:center;}
-    .tab--img .ico img{width:100%;height:100%;object-fit:contain;display:block;transition:transform .2s ease;}
-    .tab--img:hover .ico img{transform:translateY(-2px);}
+    .tab--img .ico{width:40px;height:40px;display:grid;place-items:center}
+    .tab--img .ico img{width:100%;height:100%;object-fit:contain;display:block;transition:transform .2s ease}
+    .tab--img:hover .ico img{transform:translateY(-2px)}
     @keyframes spin{to{transform:rotate(360deg)}}
     @keyframes spin-reverse{to{transform:rotate(-360deg)}}
-    .tab--home{margin-top:-26px;}
-    .tab--home .bubble{
-      position:relative;width:64px;height:64px;border-radius:50%;
+    .tab--home{margin-top:-26px}
+    .tab--home .bubble{position:relative;width:64px;height:64px;border-radius:50%;
       background:conic-gradient(from 0deg,#82d1ff,#3b8cff,#0D56E2,#3b8cff,#82d1ff);
-      box-shadow:0 10px 18px rgba(0,0,0,.15);
-      display:flex;align-items:center;justify-content:center;
-      animation:spin 9s linear infinite;
-    }
-    .tab--home .bubble__icon{
-      width:36px;height:36px;object-fit:contain;display:block;
-      animation:spin-reverse 9s linear infinite;
-    }
+      box-shadow:0 10px 18px rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;animation:spin 9s linear infinite}
+    .tab--home .bubble__icon{width:36px;height:36px;object-fit:contain;display:block;animation:spin-reverse 9s linear infinite}
+
+    /* ==== 전화 FAB & 메뉴 ==== */
+    .call-fab{position:fixed;right:16px;top:16px;z-index:1000}
+    .call-fab__btn{width:52px;height:52px;border-radius:50%;background:#ffffffcc;backdrop-filter:blur(6px);
+      border:1px solid #e6ecff;box-shadow:0 8px 20px rgba(0,0,0,.12);display:grid;place-items:center;cursor:pointer}
+    .call-fab__btn img{width:28px;height:28px;display:block}
+    .call-menu{position:absolute;right:0;top:60px;width:280px;background:#fff;border:1px solid #e6ecff;border-radius:16px;
+      box-shadow:0 18px 38px rgba(0,0,0,.16);overflow:hidden;transform-origin:top right;opacity:0;pointer-events:none;
+      transform:translateY(-6px) scale(.98);transition:.18s ease}
+    .call-menu.open{opacity:1;pointer-events:auto;transform:translateY(0) scale(1)}
+    .call-menu__head{padding:12px 16px;background:linear-gradient(90deg,#eaf1ff,#f6f9ff);border-bottom:1px solid #eef3ff;display:flex;gap:8px}
+    .call-menu__head b{font-size:14px;color:#0D56E2}
+    .call-menu__head span{font-size:12px;color:#6b7280}
+    .call-list{padding:6px}
+    .call-item a{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;text-decoration:none}
+    .call-item + .call-item{margin-top:4px}
+    .call-item__icon{width:38px;height:38px;border-radius:10px;background:linear-gradient(180deg,#2A7BF6,#0D56E2);
+      display:grid;place-items:center;box-shadow:0 6px 14px rgba(45,112,255,.25)}
+    .call-item__icon svg{width:18px;height:18px;fill:#fff}
+    .call-item__text{display:flex;flex-direction:column}
+    .call-item__text .label{font-size:13px;color:#64748b}
+    .call-item__text .num{font-size:16px;font-weight:800;color:#0D56E2;letter-spacing:.2px}
+    .call-item a:hover{background:#f5f8ff}
+    .call-item a:active{transform:translateY(1px)}
+
     @media(max-width:520px){
       .logo-eye{width:100px}
-      .tab--img .ico{width:36px;height:36px;}
-      .tab--home .bubble{width:58px;height:58px;}
-      .tab--home .bubble__icon{width:32px;height:32px;}
+      .tab--img .ico{width:36px;height:36px}
+      .tab--home .bubble{width:58px;height:58px}
+      .tab--home .bubble__icon{width:32px;height:32px}
+      .call-fab{right:12px;top:12px}
+      .call-menu{width:240px}
     }
-
-    /* ==== 전화 FAB ==== */
-    .call-fab{ position:fixed; right:16px; top:16px; z-index:1000; }
-    .call-fab__btn{
-      width:52px; height:52px; border-radius:50%;
-      background:#ffffffcc; backdrop-filter: blur(6px);
-      border:1px solid #e6ecff; box-shadow:0 8px 20px rgba(0,0,0,.12);
-      display:grid; place-items:center; cursor:pointer;
-    }
-    .call-fab__btn img{ width:28px; height:28px; display:block; }
-    .call-menu{
-      position:absolute; right:0; top:60px; width:240px;
-      background:#fff; border:1px solid #e6ecff; border-radius:14px;
-      box-shadow:0 18px 38px rgba(0,0,0,.16);
-      overflow:hidden; transform-origin: top right;
-      opacity:0; pointer-events:none; transform:scale(.96); transition:.15s ease;
-    }
-    .call-menu.open{ opacity:1; pointer-events:auto; transform:scale(1); }
-    .call-item{ display:flex; flex-direction:column; gap:2px; padding:12px 14px; }
-    .call-item + .call-item{ border-top:1px solid #f0f3ff; }
-    .call-item b{ font-size:14px; }
-    .call-item a{ color:#0D56E2; font-weight:700; font-size:15px; text-decoration:none; }
-    @media (max-width:520px){ .call-fab{ right:12px; top:12px; } .call-menu{ width:220px; } }
   </style>
 </head>
 <body>
@@ -120,103 +132,114 @@
         <p>우리 동네 나침반</p>
       </div>
     </div>
+
     <!-- 전화 빠른메뉴 -->
     <div class="call-fab" aria-label="전화 메뉴">
       <button class="call-fab__btn" id="callFabBtn" aria-haspopup="true" aria-expanded="false">
         <img src="전화.png" alt="전화하기">
       </button>
       <nav class="call-menu" id="callMenu" aria-label="지점 전화">
-        <div class="call-item">
-          <b>동촌신협 본점</b>
-          <a href="tel:+82539847414">053-984-7414</a>
-        </div>
-        <div class="call-item">
-          <b>동촌신협 대현지점</b>
-          <a href="tel:+82539440011">053-944-0011</a>
-        </div>
-        <div class="call-item">
-          <b>동촌신협 안심뉴타운지점</b>
-          <a href="tel:+82539647410">053-964-7410</a>
+        <div class="call-menu__head"><b>전화 연결</b><span>지점을 선택하세요</span></div>
+        <div class="call-list">
+          <div class="call-item">
+            <a href="tel:+82539847414"><div class="call-item__icon">
+              <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.5 2.9 3.8 5.2 6.7 6.7l2.2-2.2c.3-.3.8-.4 1.2-.2 1 .4 2.1.7 3.2.7.7 0 1.2.5 1.2 1.2v3.4c0 .7-.5 1.2-1.2 1.2C10.8 21.8 2.2 13.2 2.2 2.9c0-.7.5-1.2 1.2-1.2H6.8c.7 0 1.2.5 1.2 1.2 0 1.1.2 2.2.7 3.2.2.4.1.9-.2 1.2L6.6 10.8z"/></svg>
+            </div><div class="call-item__text"><span class="label">동촌신협 <b>본점</b></span><span class="num">053-984-7414</span></div></a>
+          </div>
+          <div class="call-item">
+            <a href="tel:+82539440011"><div class="call-item__icon">
+              <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.5 2.9 3.8 5.2 6.7 6.7l2.2-2.2c.3-.3.8-.4 1.2-.2 1 .4 2.1.7 3.2.7.7 0 1.2.5 1.2 1.2v3.4c0 .7-.5 1.2-1.2 1.2C10.8 21.8 2.2 13.2 2.2 2.9c0-.7.5-1.2 1.2-1.2H6.8c.7 0 1.2.5 1.2 1.2 0 1.1.2 2.2.7 3.2.2.4.1.9-.2 1.2L6.6 10.8z"/></svg>
+            </div><div class="call-item__text"><span class="label">동촌신협 <b>대현지점</b></span><span class="num">053-944-0011</span></div></a>
+          </div>
+          <div class="call-item">
+            <a href="tel:+82539647410"><div class="call-item__icon">
+              <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.5 2.9 3.8 5.2 6.7 6.7l2.2-2.2c.3-.3.8-.4 1.2-.2 1 .4 2.1.7 3.2.7.7 0 1.2.5 1.2 1.2v3.4c0 .7-.5 1.2-1.2 1.2C10.8 21.8 2.2 13.2 2.2 2.9c0-.7.5-1.2 1.2-1.2H6.8c.7 0 1.2.5 1.2 1.2 0 1.1.2 2.2.7 3.2.2.4.1.9-.2 1.2L6.6 10.8z"/></svg>
+            </div><div class="call-item__text"><span class="label">동촌신협 <b>안심뉴타운지점</b></span><span class="num">053-964-7410</span></div></a>
+          </div>
         </div>
       </nav>
     </div>
   </header>
 
   <main>
+    <!-- 상단 네 가지 안내 카드 -->
     <div class="card-list">
-      <div class="card c1">
-        <div class="text">
-          <div class="kicker">비과세 혜택으로 이자소득세 1.4% 적용</div>
-          <div class="title">금리 안내</div>
-          <div class="cta-row">→</div>
-        </div>
-        <div class="emoji"><img src="1.png" alt=""></div>
-      </div>
-
-      <div class="card c2">
-        <div class="text">
-          <div class="kicker">체크카드·출자금·모임통장 등 다양한 이벤트 진행</div>
-          <div class="title">이벤트 안내</div>
-          <div class="cta-row">→</div>
-        </div>
-        <div class="emoji"><img src="2.png" alt=""></div>
-      </div>
-
-      <div class="card c3">
-        <div class="text">
-          <div class="kicker">비과세·금리우대·문화센터·건강검진 등 조합원 전용</div>
-          <div class="title">혜택 안내</div>
-          <div class="cta-row">→</div>
-        </div>
-        <div class="emoji"><img src="3.png" alt=""></div>
-      </div>
-
+      <div class="card c1"><div class="text"><div class="kicker">비과세 혜택으로 이자소득세 1.4% 적용</div><div class="title">금리 안내</div><div class="cta-row">→</div></div><div class="emoji"><img src="1.png" alt=""></div></div>
+      <div class="card c2"><div class="text"><div class="kicker">체크카드·출자금·모임통장 등 다양한 이벤트 진행</div><div class="title">이벤트 안내</div><div class="cta-row">→</div></div><div class="emoji"><img src="2.png" alt=""></div></div>
+      <div class="card c3"><div class="text"><div class="kicker">비과세·금리우대·문화센터·건강검진 등 조합원 전용</div><div class="title">혜택 안내</div><div class="cta-row">→</div></div><div class="emoji"><img src="3.png" alt=""></div></div>
       <a class="card c4" href="https://heyzine.com/flip-book/385aa0d3ef.html" target="_blank" rel="noopener">
-        <div class="text">
-          <div class="kicker">지역 소상공인과 함께하는 상생 프로그램</div>
-          <div class="title">어부바플랜 안내</div>
-          <div class="cta-row">→</div>
-        </div>
+        <div class="text"><div class="kicker">지역 소상공인과 함께하는 상생 프로그램</div><div class="title">어부바플랜 안내</div><div class="cta-row">→</div></div>
         <div class="emoji"><img src="어부바플랜.png" alt=""></div>
       </a>
     </div>
 
-    <div class="query-wrap">
-      <h2>조합원 포인트 조회</h2>
-      <form>
-        <div class="form-row">
-          <input class="input" type="text" placeholder="성함" required />
-          <input class="input" type="tel" placeholder="연락처 (숫자만)" maxlength="11" required />
-          <button class="btn" type="submit">조회하기</button>
+    <!-- 체크카드 캐러셀 -->
+    <section class="shelf-wrap" aria-label="동촌신협 체크카드">
+      <div class="shelf-head">
+        <h2>체크카드 모아보기</h2>
+        <div class="shelf-ctrl">
+          <button class="shelf-btn" id="prevBtn" aria-label="이전 카드">◀</button>
+          <button class="shelf-btn" id="nextBtn" aria-label="다음 카드">▶</button>
         </div>
-        <label class="agree">
-          <input type="checkbox" required /> 개인정보(성명/연락처) 조회에 동의합니다.
-        </label>
-        <div class="helper">※ 실제 조회 연동은 추후 연결됩니다.</div>
-      </form>
-    </div>
+      </div>
+
+      <div class="shelf" id="cardShelf">
+        <!-- 카드 1 -->
+        <article class="shelf-card">
+          <a href="https://www.naver.com" target="_blank" rel="noopener">
+            <div class="shelf-card__img">이미지 영역 (가로 3:2 권장)</div>
+            <div class="shelf-card__body">
+              <div class="shelf-card__title">동촌 신협 체크카드 A</div>
+              <div class="shelf-card__desc">간편한 혜택, 일상 사용에 최적</div>
+            </div>
+          </a>
+        </article>
+        <!-- 카드 2 -->
+        <article class="shelf-card">
+          <a href="https://www.naver.com" target="_blank" rel="noopener">
+            <div class="shelf-card__img">이미지 영역</div>
+            <div class="shelf-card__body">
+              <div class="shelf-card__title">동촌 신협 체크카드 B</div>
+              <div class="shelf-card__desc">교통/편의점 캐시백 특화</div>
+            </div>
+          </a>
+        </article>
+        <!-- 카드 3 -->
+        <article class="shelf-card">
+          <a href="https://www.naver.com" target="_blank" rel="noopener">
+            <div class="shelf-card__img">이미지 영역</div>
+            <div class="shelf-card__body">
+              <div class="shelf-card__title">동촌 신협 체크카드 C</div>
+              <div class="shelf-card__desc">온라인 쇼핑 할인형</div>
+            </div>
+          </a>
+        </article>
+        <!-- 카드 4 -->
+        <article class="shelf-card">
+          <a href="https://www.naver.com" target="_blank" rel="noopener">
+            <div class="shelf-card__img">이미지 영역</div>
+            <div class="shelf-card__body">
+              <div class="shelf-card__title">동촌 신협 체크카드 D</div>
+              <div class="shelf-card__desc">해외 결제 수수료 절감</div>
+            </div>
+          </a>
+        </article>
+        <!-- 필요 시 더 추가 -->
+      </div>
+    </section>
   </main>
 
+  <!-- 하단 탭 -->
   <nav class="tabbar">
-    <div class="tab tab--img" id="tab-onbank">
-      <div class="ico"><img src="온뱅크.png" alt="온뱅크"></div>온뱅크
-    </div>
-    <div class="tab tab--img" id="tab-lifeon">
-      <div class="ico"><img src="라이프온.png" alt="라이프온"></div>라이프온
-    </div>
-    <div class="tab tab--home active" id="tab-home">
-      <div class="bubble"><img class="bubble__icon" src="홈.png" alt="홈"></div>메인화면
-    </div>
-    <div class="tab tab--img" id="tab-reon">
-      <div class="ico"><img src="리온브랜치.png" alt="리온브랜치"></div>리온브랜치
-    </div>
-    <div class="tab tab--img" id="tab-kakao">
-      <div class="ico"><img src="카카오톡.png" alt="카카오톡"></div>카카오톡
-    </div>
+    <div class="tab tab--img" id="tab-onbank"><div class="ico"><img src="온뱅크.png" alt="온뱅크"></div>온뱅크</div>
+    <div class="tab tab--img" id="tab-lifeon"><div class="ico"><img src="라이프온.png" alt="라이프온"></div>라이프온</div>
+    <div class="tab tab--home active" id="tab-home"><div class="bubble"><img class="bubble__icon" src="홈.png" alt="홈"></div>메인화면</div>
+    <div class="tab tab--img" id="tab-reon"><div class="ico"><img src="리온브랜치.png" alt="리온브랜치"></div>리온브랜치</div>
+    <div class="tab tab--img" id="tab-kakao"><div class="ico"><img src="카카오톡.png" alt="카카오톡"></div>카카오톡</div>
   </nav>
 
   <script>
-    // 탭 UI 활성화
+    // 탭 활성화
     document.querySelectorAll('.tabbar .tab').forEach(tab=>{
       tab.addEventListener('click', ()=>{
         document.querySelectorAll('.tabbar .tab').forEach(t=>t.classList.remove('active'));
@@ -224,34 +247,34 @@
       });
     });
 
-    // 외부 링크 열기
-    function openLink(url){ window.location.href = url; }
-    document.getElementById('tab-onbank')?.addEventListener('click', ()=> openLink('https://ader.naver.com/v1/caL2Vp7db-KjGWa1VwH31E0TWLiyqkxUAEGlcU6Tq2FIV-pwfJZhwjIOqG7Xnb-8VVeSsiDME1Y3U8rgGLvmjMdBd95iES7QlhZa5M8-VwVwpXiPzyGBQSjNz70Q_-aWQ1mgZOIlsQvMR4x3Xdyae9MWlj8XWvJ-ec8u7BG4nCHLcuRUmaN08XZiwXozGgN4gdVypOaSfi01MJJbTIWnthV15P-WUpRbHMOBQndc5dUHe0NyxjkOC0TD-BdK7uvrSk5U9p2SGkoQZ4a7lzx4yYzqPBlVPL7Q2oCFXhhtaor63AhNW8_AL5Em8sWLp-aEs6uz7cZX2sgaGURv1yvmxw==?c=mnaver.search.brand&t=0'));
-    document.getElementById('tab-lifeon')?.addEventListener('click', ()=> openLink('https://ader.naver.com/v1/UOhPt58SgJTO6Az6nXutN0u2pPMjVvaXu89S5MEBUSFXO2v2h9-XfXuZyf32T-L2kHXPTc48V5OPXnjCzZSxs5imeVZ7aD7x4snY9t1UCyqV7T2nGdwtnuA3LnmbapeLjfopGmhijUWKBW7_0O5nV5gS2gNeL2V0BOvUAUfv7AtHRe6tLk5e3vycILZFjgkm-aqGgPvMlF0qZF7_m1UHqD2dGJ5m9VizeqjccsO3_DCj-E-2nV3e9VsBOZsAqq3Jt9N2yk9p2xOIoL2zAVKEJqDUDyVoTh6EvU24hiHFMdyRA3lZJNeiSZpdrT145QtX?c=mnaver.search.brand&t=0'));
-    document.getElementById('tab-reon')?.addEventListener('click', ()=> openLink('https://m.cu.co.kr/mbranch/mai/MAI010001U'));
-    document.getElementById('tab-kakao')?.addEventListener('click', ()=> openLink('http://pf.kakao.com/_dIxgms'));
-    document.getElementById('tab-home')?.addEventListener('click', ()=> window.location.reload());
+    // 외부 링크
+    const openLink=url=>window.location.href=url;
+    document.getElementById('tab-onbank')?.addEventListener('click',()=>openLink('https://ader.naver.com/v1/caL2Vp7db-KjGWa1VwH31E0TWLiyqkxUAEGlcU6Tq2FIV-pwfJZhwjIOqG7Xnb-8VVeSsiDME1Y3U8rgGLvmjMdBd95iES7QlhZa5M8-VwVwpXiPzyGBQSjNz70Q_-aWQ1mgZOIlsQvMR4x3Xdyae9MWlj8XWvJ-ec8u7BG4nCHLcuRUmaN08XZiwXozGgN4gdVypOaSfi01MJJbTIWnthV15P-WUpRbHMOBQndc5dUHe0NyxjkOC0TD-BdK7uvrSk5U9p2SGkoQZ4a7lzx4yYzqPBlVPL7Q2oCFXhhtaor63AhNW8_AL5Em8sWLp-aEs6uz7cZX2sgaGURv1yvmxw==?c=mnaver.search.brand&t=0'));
+    document.getElementById('tab-lifeon')?.addEventListener('click',()=>openLink('https://ader.naver.com/v1/UOhPt58SgJTO6Az6nXutN0u2pPMjVvaXu89S5MEBUSFXO2v2h9-XfXuZyf32T-L2kHXPTc48V5OPXnjCzZSxs5imeVZ7aD7x4snY9t1UCyqV7T2nGdwtnuA3LnmbapeLjfopGmhijUWKBW7_0O5nV5gS2gNeL2V0BOvUAUfv7AtHRe6tLk5e3vycILZFjgkm-aqGgPvMlF0qZF7_m1UHqD2dGJ5m9VizeqjccsO3_DCj-E-2nV3e9VsBOZsAqq3Jt9N2yk9p2xOIoL2zAVKEJqDUDyVoTh6EvU24hiHFMdyRA3lZJNeiSZpdrT145QtX?c=mnaver.search.brand&t=0'));
+    document.getElementById('tab-reon')?.addEventListener('click',()=>openLink('https://m.cu.co.kr/mbranch/mai/MAI010001U'));
+    document.getElementById('tab-kakao')?.addEventListener('click',()=>openLink('http://pf.kakao.com/_dIxgms'));
+    document.getElementById('tab-home')?.addEventListener('click',()=>window.location.reload());
 
-    // ==== 전화 메뉴 토글 ====
+    // 전화 메뉴 토글
     (function(){
-      const btn  = document.getElementById('callFabBtn');
-      const menu = document.getElementById('callMenu');
-      if(!btn || !menu) return;
+      const btn=document.getElementById('callFabBtn');
+      const menu=document.getElementById('callMenu');
+      if(!btn||!menu) return;
+      const closeMenu=()=>{menu.classList.remove('open');btn.setAttribute('aria-expanded','false')}
+      const toggleMenu=e=>{e.stopPropagation();menu.classList.toggle('open');btn.setAttribute('aria-expanded',menu.classList.contains('open')?'true':'false')}
+      btn.addEventListener('click',toggleMenu);
+      document.addEventListener('click',e=>{if(!menu.contains(e.target)&&e.target!==btn) closeMenu()});
+      window.addEventListener('keydown',e=>{if(e.key==='Escape') closeMenu()});
+    })();
 
-      function closeMenu(){
-        menu.classList.remove('open');
-        btn.setAttribute('aria-expanded','false');
-      }
-      function toggleMenu(e){
-        e.stopPropagation();
-        menu.classList.toggle('open');
-        btn.setAttribute('aria-expanded', menu.classList.contains('open') ? 'true' : 'false');
-      }
-      btn.addEventListener('click', toggleMenu);
-      document.addEventListener('click', (e)=>{
-        if(!menu.contains(e.target) && e.target!==btn) closeMenu();
-      });
-      window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeMenu(); });
+    // 캐러셀 좌우 버튼
+    (function(){
+      const shelf=document.getElementById('cardShelf');
+      const prev=document.getElementById('prevBtn');
+      const next=document.getElementById('nextBtn');
+      const step=260; // 한 번에 이동할 픽셀 (카드 너비 대략)
+      prev.addEventListener('click',()=>shelf.scrollBy({left:-step,behavior:'smooth'}));
+      next.addEventListener('click',()=>shelf.scrollBy({left: step,behavior:'smooth'}));
     })();
   </script>
 
