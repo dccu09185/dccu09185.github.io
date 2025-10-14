@@ -20,21 +20,22 @@
       background:#f6f8fc;
       color:var(--ink);
     }
+    a{text-decoration:none;color:inherit}
 
-    /* ===== 헤더 ===== */
+    /* ===== 헤더 (세로 축소) ===== */
     header{
       background:linear-gradient(180deg,var(--brand1),var(--brand2));
-      padding:32px 22px 76px;
+      padding:20px 22px 40px;
       color:#fff;
       text-align:left;
       position:relative;
     }
     .header-row{display:flex;align-items:center;gap:18px}
-    .title-wrap h1{margin:0;font-size:34px;font-weight:900;letter-spacing:-.2px;}
-    .title-wrap p{margin:8px 0 0;font-size:18px;color:#eaf1ff;font-weight:600;}
+    .title-wrap h1{margin:0; font-size:34px; font-weight:900; letter-spacing:-.2px;}
+    .title-wrap p{margin:6px 0 0; font-size:16px; color:#eaf1ff; font-weight:600;}
 
     /* ===== 로고 눈동자 ===== */
-    .logo-eye{position:relative;width:126px;aspect-ratio:1/1;overflow:hidden;}
+    .logo-eye{position:relative;width:110px;aspect-ratio:1/1;overflow:hidden;}
     .logo-eye img{width:100%;height:auto;display:block}
     .pupil{position:absolute;width:5px;height:5px;background:#111;border-radius:50%;box-shadow:0 0 0 2px #fff;transform:translate(-50%,-50%);pointer-events:none;}
     .pupil-left{left:43%;top:38.5%}
@@ -45,13 +46,18 @@
     main{max-width:960px;margin:16px auto 110px;padding:0 16px}
 
     .card-list{display:flex;flex-direction:column;gap:16px}
-    .card{display:flex;align-items:center;justify-content:space-between;min-height:120px;padding:24px 22px;border-radius:var(--radius);box-shadow:var(--shadow);color:#fff;position:relative;overflow:hidden;transition:transform .15s ease,filter .15s ease}
+    .card{
+      display:flex;align-items:center;justify-content:space-between;
+      min-height:120px;padding:22px;border-radius:var(--radius);
+      box-shadow:var(--shadow);color:#fff;position:relative;overflow:hidden;
+      transition:transform .15s ease,filter .15s ease
+    }
     .card:hover{transform:translateY(-2px);filter:saturate(1.05)}
     .text{max-width:78%}
     .kicker{opacity:.9;font-size:13px;margin-bottom:6px}
     .title{font-size:20px;font-weight:800;line-height:1.25;letter-spacing:-.2px}
+    .cta-row{margin-top:10px;font-size:20px;opacity:.9}
     .emoji img{width:54px;height:auto;display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,.15))}
-    .cta{position:absolute;right:20px;bottom:16px;font-size:22px;opacity:.8}
 
     .c1{background:linear-gradient(90deg,#3BA0FF,#2F78F6)}
     .c2{background:linear-gradient(90deg,#10B2B7,#0E7E83)}
@@ -70,28 +76,27 @@
 
     /* ===== 하단 탭 ===== */
     .tabbar{
-      position:fixed;left:0;right:0;bottom:0;
-      background:#fff;border-top:1px solid #e9eef6;
-      display:flex;justify-content:space-around;gap:6px;
-      padding:10px 6px 12px;z-index:20;
+      position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #e9eef6;
+      display:flex;justify-content:space-around;gap:6px;padding:10px 6px 12px;z-index:20
     }
     .tab{display:flex;flex-direction:column;align-items:center;gap:6px;color:#4b5563;font-size:12px;cursor:pointer;}
     .tab.active{color:var(--brand2);font-weight:700}
 
-    /* PNG 탭 공통 */
+    /* PNG 탭 (밝게) */
     .tab--img .ico{width:40px;height:40px;display:grid;place-items:center;}
-    .tab--img .ico img{width:100%;height:100%;object-fit:contain;display:block;filter:grayscale(25%) opacity(.9);transition:filter .25s ease,transform .25s ease;}
+    .tab--img .ico img{
+      width:100%;height:100%;object-fit:contain;display:block;
+      filter:none;transition:transform .2s ease;
+    }
     .tab--img:hover .ico img{transform:translateY(-2px);}
-    .tab--img.active .ico img{filter:none;}
 
     /* 홈 탭 (회전 그라디언트) */
     @keyframes spin{to{transform:rotate(360deg)}}
     @keyframes spin-reverse{to{transform:rotate(-360deg)}}
-
     .tab--home{margin-top:-26px;}
     .tab--home .bubble{
       position:relative;width:64px;height:64px;border-radius:50%;
-      background:conic-gradient(from 0deg,#6ec6ff,#2A7BF6,#0D56E2,#2A7BF6,#6ec6ff);
+      background:conic-gradient(from 0deg,#82d1ff,#3b8cff,#0D56E2,#3b8cff,#82d1ff);
       box-shadow:0 10px 18px rgba(0,0,0,.15);
       display:flex;align-items:center;justify-content:center;
       animation:spin 9s linear infinite;will-change:transform;
@@ -102,6 +107,7 @@
     }
 
     @media(max-width:520px){
+      .logo-eye{width:100px}
       .tab--img .ico{width:36px;height:36px;}
       .tab--home .bubble{width:58px;height:58px;}
       .tab--home .bubble__icon{width:32px;height:32px;}
@@ -130,21 +136,36 @@
         <div class="text">
           <div class="kicker">좋은 점 ①</div>
           <div class="title">공란 추후 입력 예정</div>
+          <div class="cta-row">→</div>
         </div>
         <div class="emoji"><img src="1.png" alt="분홍돼지"></div>
-        <div class="cta">→</div>
       </div>
+
       <div class="card c2">
-        <div class="text"><div class="kicker">좋은 점 ②</div><div class="title">공란 추후 입력 예정</div></div>
-        <div class="emoji"><img src="2.png" alt="파랑돼지"></div><div class="cta">→</div>
+        <div class="text">
+          <div class="kicker">좋은 점 ②</div>
+          <div class="title">공란 추후 입력 예정</div>
+          <div class="cta-row">→</div>
+        </div>
+        <div class="emoji"><img src="2.png" alt="파랑돼지"></div>
       </div>
+
       <div class="card c3">
-        <div class="text"><div class="kicker">좋은 점 ③</div><div class="title">공란 추후 입력 예정</div></div>
-        <div class="emoji"><img src="3.png" alt="빨강돼지"></div><div class="cta">→</div>
+        <div class="text">
+          <div class="kicker">좋은 점 ③</div>
+          <div class="title">공란 추후 입력 예정</div>
+          <div class="cta-row">→</div>
+        </div>
+        <div class="emoji"><img src="3.png" alt="빨강돼지"></div>
       </div>
+
       <div class="card c4">
-        <div class="text"><div class="kicker">좋은 점 ④</div><div class="title">공란 추후 입력 예정</div></div>
-        <div class="emoji"><img src="4.png" alt="주황돼지"></div><div class="cta">→</div>
+        <div class="text">
+          <div class="kicker">좋은 점 ④</div>
+          <div class="title">공란 추후 입력 예정</div>
+          <div class="cta-row">→</div>
+        </div>
+        <div class="emoji"><img src="4.png" alt="주황돼지"></div>
       </div>
     </div>
 
@@ -165,30 +186,91 @@
   </main>
 
   <nav class="tabbar">
-    <div class="tab tab--img">
+    <div class="tab tab--img" id="tab-onbank">
       <div class="ico"><img src="온뱅크.png" alt="온뱅크"></div>온뱅크
     </div>
-    <div class="tab tab--img">
+    <div class="tab tab--img" id="tab-lifeon">
       <div class="ico"><img src="라이프온.png" alt="라이프온"></div>라이프온
     </div>
-    <div class="tab tab--home active">
+    <div class="tab tab--home active" id="tab-home">
       <div class="bubble"><img class="bubble__icon" src="홈.png" alt="홈"></div>메인화면
     </div>
-    <div class="tab tab--img">
+    <div class="tab tab--img" id="tab-reon">
       <div class="ico"><img src="리온브랜치.png" alt="리온브랜치"></div>리온브랜치
     </div>
-    <div class="tab tab--img">
+    <div class="tab tab--img" id="tab-kakao">
       <div class="ico"><img src="카카오톡.png" alt="카카오톡"></div>카카오톡
     </div>
   </nav>
 
   <script>
-    // 탭 활성화 전환
+    // 탭 클릭 시 활성화
     document.querySelectorAll('.tabbar .tab').forEach(tab=>{
       tab.addEventListener('click', ()=>{
         document.querySelectorAll('.tabbar .tab').forEach(t=>t.classList.remove('active'));
         tab.classList.add('active');
       });
+    });
+
+    // 링크 오픈 헬퍼
+    function openLink(url){ window.location.href = url; }
+
+    // 앱 열기 함수
+    function openApp(options){
+      const { androidIntent, androidMarket, iosScheme, iosStore } = options;
+      const ua = navigator.userAgent;
+      const isAndroid = /android/i.test(ua);
+      const isIOS = /iPad|iPhone|iPod/.test(ua);
+
+      if(isAndroid){
+        try{
+          window.location.href = androidIntent;
+          setTimeout(()=>{ window.location.href = androidMarket; }, 1500);
+        }catch(e){ window.location.href = androidMarket; }
+      }else if(isIOS){
+        const now = Date.now();
+        window.location.href = iosScheme;
+        setTimeout(()=>{
+          if(Date.now() - now < 1500) window.location.href = iosStore;
+        }, 1200);
+      }else{
+        window.location.href = androidMarket || iosStore || '#';
+      }
+    }
+
+    // 온뱅크
+    document.getElementById('tab-onbank').addEventListener('click', ()=>{
+      openApp({
+        androidIntent: 'intent://open#Intent;scheme=onbank;package=kr.co.cu.onbank;end',
+        androidMarket: 'https://play.google.com/store/apps/details?id=kr.co.cu.onbank&hl=ko',
+        iosScheme: 'onbank://',
+        iosStore: 'https://apps.apple.com/app/id1551032383'
+      });
+    });
+
+    // 라이프온
+    document.getElementById('tab-lifeon').addEventListener('click', ()=>{
+      openApp({
+        androidIntent: 'intent://open#Intent;scheme=lifeon;package=kr.co.cu.lifeapp;end',
+        androidMarket: 'https://play.google.com/store/apps/details?id=kr.co.cu.lifeapp&hl=ko',
+        iosScheme: 'lifeon://',
+        iosStore: 'https://apps.apple.com/app/id6447442247'
+      });
+    });
+
+    // 리온브랜치
+    document.getElementById('tab-reon').addEventListener('click', ()=>{
+      openLink('https://m.cu.co.kr/mbranch/mai/MAI010001U');
+    });
+
+    // 카카오톡
+    document.getElementById('tab-kakao').addEventListener('click', ()=>{
+      openLink('http://pf.kakao.com/_dIxgms');
+    });
+
+    // 메인화면 새로고침
+    document.getElementById('tab-home').addEventListener('click', ()=>{
+      window.location.reload();
     });
 
     // 눈동자 트래킹
@@ -216,6 +298,5 @@
       tick();
     })();
   </script>
-
 </body>
 </html>
