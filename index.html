@@ -53,10 +53,14 @@
       transition:transform .15s ease,filter .15s ease
     }
     .card:hover{transform:translateY(-2px);filter:saturate(1.05)}
-    .text{max-width:78%}
+    .text{
+      max-width:72%;
+      display:flex;flex-direction:column;justify-content:center;
+    }
     .kicker{opacity:.9;font-size:13px;margin-bottom:6px}
     .title{font-size:20px;font-weight:800;line-height:1.25;letter-spacing:-.2px}
     .cta-row{margin-top:10px;font-size:20px;opacity:.9}
+    .emoji{display:flex;justify-content:flex-end;align-items:center;margin-left:12px;}
     .emoji img{width:54px;height:auto;display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,.15))}
 
     .c1{background:linear-gradient(90deg,#3BA0FF,#2F78F6)}
@@ -138,7 +142,7 @@
           <div class="title">공란 추후 입력 예정</div>
           <div class="cta-row">→</div>
         </div>
-        <div class="emoji"><img src="1.png" alt="분홍돼지"></div>
+        <div class="emoji"><img src="1.png"></div>
       </div>
 
       <div class="card c2">
@@ -147,7 +151,7 @@
           <div class="title">공란 추후 입력 예정</div>
           <div class="cta-row">→</div>
         </div>
-        <div class="emoji"><img src="2.png" alt="파랑돼지"></div>
+        <div class="emoji"><img src="2.png"></div>
       </div>
 
       <div class="card c3">
@@ -156,17 +160,20 @@
           <div class="title">공란 추후 입력 예정</div>
           <div class="cta-row">→</div>
         </div>
-        <div class="emoji"><img src="3.png" alt="빨강돼지"></div>
+        <div class="emoji"><img src="3.png"></div>
       </div>
 
-      <div class="card c4">
+      <!-- ✅ 카드 전체 링크 (좋은 점 ④) -->
+      <a class="card c4"
+         href="https://heyzine.com/flip-book/385aa0d3ef.html"
+         target="_blank">
         <div class="text">
           <div class="kicker">좋은 점 ④</div>
-          <div class="title">공란 추후 입력 예정</div>
+          <div class="title">동촌신협 어부바플랜 선정업체</div>
           <div class="cta-row">→</div>
         </div>
-        <div class="emoji"><img src="4.png" alt="주황돼지"></div>
-      </div>
+        <div class="emoji"><img src="어부바플랜.png"></div>
+      </a>
     </div>
 
     <div class="query-wrap">
@@ -212,10 +219,8 @@
     });
   });
 
-  // 앱/웹 링크 열기
-  function openLink(url) {
-    window.location.href = url;
-  }
+  // 링크 열기
+  function openLink(url) { window.location.href = url; }
 
   // 온뱅크 (네이버 광고 추적 링크)
   document.getElementById('tab-onbank')?.addEventListener('click', () => {
@@ -241,7 +246,50 @@
   document.getElementById('tab-home')?.addEventListener('click', () => {
     window.location.reload();
   });
-</script>
+
+  /* === 눈동자 트래킹: 작은 반경 + 영역 이탈 방지 + 중앙 복귀 === */
+  (function(){
+    const box = document.getElementById('logoEye');
+    if(!box) return;
+
+    const pupils=[box.querySelector('.pupil-left'),box.querySelector('.pupil-right')];
+    const range=parseFloat(getComputedStyle(box).getPropertyValue('--pupil-range'))||3;
+
+    function centersPx(){
+      const r=box.getBoundingClientRect();
+      return pupils.map(p=>{
+        const cs=getComputedStyle(p);
+        return {x:(parseFloat(cs.left)/100)*r.width,y:(parseFloat(cs.top)/100)*r.height};
+      });
+    }
+
+    let centers=centersPx(), target={dx:0,dy:0}, cur={dx:0,dy:0};
+
+    function onMove(e){
+      const r=box.getBoundingClientRect();
+      const mx=Math.min(Math.max(e.clientX-r.left,0),r.width);
+      const my=Math.min(Math.max(e.clientY-r.top,0),r.height);
+      const cx=r.width/2, cy=r.height/2;
+      let dx=(mx-cx)/(r.width/2), dy=(my-cy)/(r.height/2);
+      const len=Math.hypot(dx,dy)||1; dx/=len; dy/=len;
+      target.dx=dx*range; target.dy=dy*range;
+    }
+    function reset(){target.dx=0;target.dy=0;}
+    function tick(){
+      const ease=0.22;
+      cur.dx+=(target.dx-cur.dx)*ease;
+      cur.dy+=(target.dy-cur.dy)*ease;
+      centers=centersPx();
+      pupils.forEach((p,i)=>{p.style.left=(centers[i].x+cur.dx)+'px';p.style.top=(centers[i].y+cur.dy)+'px';});
+      requestAnimationFrame(tick);
+    }
+    const header=document.querySelector('header')||document.body;
+    header.addEventListener('mousemove',onMove);
+    header.addEventListener('mouseleave',reset);
+    window.addEventListener('resize',()=>{centers=centersPx();});
+    tick();
+  })();
+  </script>
 
 </body>
 </html>
