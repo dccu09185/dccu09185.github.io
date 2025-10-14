@@ -6,45 +6,26 @@
   <title>동촌신협</title>
   <style>
     :root{
-      --brand1:#2A7BF6;
-      --brand2:#0D56E2;
-      --ink:#111;
-      --muted:#6b7280;
-      --radius:18px;
-      --shadow:0 10px 24px rgba(0,0,0,.08);
+      --brand1:#2A7BF6; --brand2:#0D56E2; --ink:#111; --muted:#6b7280;
+      --radius:18px; --shadow:0 10px 24px rgba(0,0,0,.08);
     }
     *{box-sizing:border-box}
-    html,body{
-      margin:0;
-      font-family:'Noto Sans KR',Pretendard,Segoe UI,Roboto,sans-serif;
-      background:#f6f8fc;
-      color:var(--ink);
-    }
+    html,body{margin:0; font-family:'Noto Sans KR',Pretendard,Segoe UI,Roboto,sans-serif; background:#f6f8fc; color:var(--ink);}
     a{text-decoration:none;color:inherit}
 
-    /* ===== 헤더 (세로 축소) ===== */
+    /* ===== 헤더 ===== */
     header{
       background:linear-gradient(180deg,var(--brand1),var(--brand2));
-      padding:20px 20px 2%;
-      color:#fff;
-      text-align:left;
-      position:relative;
+      padding:20px 20px 2%; color:#fff; text-align:left; position:relative;
     }
     .header-row{display:flex;align-items:center;gap:18px}
     .title-wrap h1{margin:0; font-size:34px; font-weight:900; letter-spacing:-.2px;}
     .title-wrap p{margin:6px 0 0; font-size:16px; color:#eaf1ff; font-weight:600;}
-
-    /* ===== 로고 눈동자 ===== */
-    .logo-eye{position:relative;width:110px;aspect-ratio:1/1;overflow:hidden;}
-    .logo-eye img{width:100%;height:auto;display:block}
-    .pupil{position:absolute;width:5px;height:5px;background:#111;border-radius:50%;box-shadow:0 0 0 2px #fff;transform:translate(-50%,-50%);pointer-events:none;}
-    .pupil-left{left:43%;top:38.5%}
-    .pupil-right{left:57%;top:38.5%}
-    .logo-eye{--pupil-range:3px}
+    .logo-eye{width:110px; aspect-ratio:1/1; overflow:hidden;}
+    .logo-eye img{width:100%; display:block}
 
     /* ===== 메인 ===== */
     main{max-width:960px;margin:16px auto 110px;padding:0 16px}
-
     .card-list{display:flex;flex-direction:column;gap:16px}
     .card{
       display:flex;align-items:center;justify-content:space-between;
@@ -53,16 +34,12 @@
       transition:transform .15s ease,filter .15s ease
     }
     .card:hover{transform:translateY(-2px);filter:saturate(1.05)}
-    .text{
-      max-width:72%;
-      display:flex;flex-direction:column;justify-content:center;
-    }
+    .text{max-width:72%;display:flex;flex-direction:column;justify-content:center;}
     .kicker{opacity:.9;font-size:13px;margin-bottom:6px}
     .title{font-size:20px;font-weight:800;line-height:1.25;letter-spacing:-.2px}
     .cta-row{margin-top:10px;font-size:20px;opacity:.9}
     .emoji{display:flex;justify-content:flex-end;align-items:center;margin-left:12px;}
-    .emoji img{width:54px;height:auto;display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,.15))}
-
+    .emoji img{width:54px;display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,.15))}
     .c1{background:linear-gradient(90deg,#3BA0FF,#2F78F6)}
     .c2{background:linear-gradient(90deg,#10B2B7,#0E7E83)}
     .c3{background:linear-gradient(90deg,#0F5AD4,#073A8F)}
@@ -85,16 +62,9 @@
     }
     .tab{display:flex;flex-direction:column;align-items:center;gap:6px;color:#4b5563;font-size:12px;cursor:pointer;}
     .tab.active{color:var(--brand2);font-weight:700}
-
-    /* PNG 탭 (밝게) */
     .tab--img .ico{width:40px;height:40px;display:grid;place-items:center;}
-    .tab--img .ico img{
-      width:100%;height:100%;object-fit:contain;display:block;
-      filter:none;transition:transform .2s ease;
-    }
+    .tab--img .ico img{width:100%;height:100%;object-fit:contain;display:block;transition:transform .2s ease;}
     .tab--img:hover .ico img{transform:translateY(-2px);}
-
-    /* 홈 탭 (회전 그라디언트) */
     @keyframes spin{to{transform:rotate(360deg)}}
     @keyframes spin-reverse{to{transform:rotate(-360deg)}}
     .tab--home{margin-top:-26px;}
@@ -103,34 +73,72 @@
       background:conic-gradient(from 0deg,#82d1ff,#3b8cff,#0D56E2,#3b8cff,#82d1ff);
       box-shadow:0 10px 18px rgba(0,0,0,.15);
       display:flex;align-items:center;justify-content:center;
-      animation:spin 9s linear infinite;will-change:transform;
+      animation:spin 9s linear infinite;
     }
     .tab--home .bubble__icon{
       width:36px;height:36px;object-fit:contain;display:block;
       animation:spin-reverse 9s linear infinite;
     }
-
     @media(max-width:520px){
       .logo-eye{width:100px}
       .tab--img .ico{width:36px;height:36px;}
       .tab--home .bubble{width:58px;height:58px;}
       .tab--home .bubble__icon{width:32px;height:32px;}
     }
+
+    /* ==== 전화 FAB ==== */
+    .call-fab{ position:fixed; right:16px; top:16px; z-index:1000; }
+    .call-fab__btn{
+      width:52px; height:52px; border-radius:50%;
+      background:#ffffffcc; backdrop-filter: blur(6px);
+      border:1px solid #e6ecff; box-shadow:0 8px 20px rgba(0,0,0,.12);
+      display:grid; place-items:center; cursor:pointer;
+    }
+    .call-fab__btn img{ width:28px; height:28px; display:block; }
+    .call-menu{
+      position:absolute; right:0; top:60px; width:240px;
+      background:#fff; border:1px solid #e6ecff; border-radius:14px;
+      box-shadow:0 18px 38px rgba(0,0,0,.16);
+      overflow:hidden; transform-origin: top right;
+      opacity:0; pointer-events:none; transform:scale(.96); transition:.15s ease;
+    }
+    .call-menu.open{ opacity:1; pointer-events:auto; transform:scale(1); }
+    .call-item{ display:flex; flex-direction:column; gap:2px; padding:12px 14px; }
+    .call-item + .call-item{ border-top:1px solid #f0f3ff; }
+    .call-item b{ font-size:14px; }
+    .call-item a{ color:#0D56E2; font-weight:700; font-size:15px; text-decoration:none; }
+    @media (max-width:520px){ .call-fab{ right:12px; top:12px; } .call-menu{ width:220px; } }
   </style>
 </head>
 <body>
 
   <header>
     <div class="header-row">
-      <div class="logo-eye" id="logoEye">
-        <img src="라이프온로고2.gif" alt="라이프온 로고">
-        <span class="pupil pupil-left"></span>
-        <span class="pupil pupil-right"></span>
-      </div>
+      <div class="logo-eye"><img src="라이프온로고2.gif" alt="라이프온 로고"></div>
       <div class="title-wrap">
         <h1>동촌신협</h1>
         <p>우리 동네 나침반</p>
       </div>
+    </div>
+    <!-- 전화 빠른메뉴 -->
+    <div class="call-fab" aria-label="전화 메뉴">
+      <button class="call-fab__btn" id="callFabBtn" aria-haspopup="true" aria-expanded="false">
+        <img src="전화.png" alt="전화하기">
+      </button>
+      <nav class="call-menu" id="callMenu" aria-label="지점 전화">
+        <div class="call-item">
+          <b>동촌신협 본점</b>
+          <a href="tel:+82539847414">053-984-7414</a>
+        </div>
+        <div class="call-item">
+          <b>동촌신협 대현지점</b>
+          <a href="tel:+82539440011">053-944-0011</a>
+        </div>
+        <div class="call-item">
+          <b>동촌신협 안심뉴타운지점</b>
+          <a href="tel:+82539647410">053-964-7410</a>
+        </div>
+      </nav>
     </div>
   </header>
 
@@ -142,7 +150,7 @@
           <div class="title">금리 안내</div>
           <div class="cta-row">→</div>
         </div>
-        <div class="emoji"><img src="1.png"></div>
+        <div class="emoji"><img src="1.png" alt=""></div>
       </div>
 
       <div class="card c2">
@@ -151,7 +159,7 @@
           <div class="title">이벤트 안내</div>
           <div class="cta-row">→</div>
         </div>
-        <div class="emoji"><img src="2.png"></div>
+        <div class="emoji"><img src="2.png" alt=""></div>
       </div>
 
       <div class="card c3">
@@ -160,19 +168,16 @@
           <div class="title">혜택 안내</div>
           <div class="cta-row">→</div>
         </div>
-        <div class="emoji"><img src="3.png"></div>
+        <div class="emoji"><img src="3.png" alt=""></div>
       </div>
 
-      <!-- ✅ 카드 전체 링크 (좋은 점 ④) -->
-      <a class="card c4"
-         href="https://heyzine.com/flip-book/385aa0d3ef.html"
-         target="_blank">
+      <a class="card c4" href="https://heyzine.com/flip-book/385aa0d3ef.html" target="_blank" rel="noopener">
         <div class="text">
           <div class="kicker">지역 소상공인과 함께하는 상생 프로그램</div>
           <div class="title">어부바플랜 안내</div>
           <div class="cta-row">→</div>
         </div>
-        <div class="emoji"><img src="어부바플랜.png"></div>
+        <div class="emoji"><img src="어부바플랜.png" alt=""></div>
       </a>
     </div>
 
@@ -211,68 +216,43 @@
   </nav>
 
   <script>
-  // 탭 UI 활성화
-  document.querySelectorAll('.tabbar .tab').forEach(tab=>{
-    tab.addEventListener('click', ()=>{
-      document.querySelectorAll('.tabbar .tab').forEach(t=>t.classList.remove('active'));
-      tab.classList.add('active');
+    // 탭 UI 활성화
+    document.querySelectorAll('.tabbar .tab').forEach(tab=>{
+      tab.addEventListener('click', ()=>{
+        document.querySelectorAll('.tabbar .tab').forEach(t=>t.classList.remove('active'));
+        tab.classList.add('active');
+      });
     });
-  });
 
-  // 링크 열기
-  function openLink(url) { window.location.href = url; }
+    // 외부 링크 열기
+    function openLink(url){ window.location.href = url; }
+    document.getElementById('tab-onbank')?.addEventListener('click', ()=> openLink('https://ader.naver.com/v1/caL2Vp7db-KjGWa1VwH31E0TWLiyqkxUAEGlcU6Tq2FIV-pwfJZhwjIOqG7Xnb-8VVeSsiDME1Y3U8rgGLvmjMdBd95iES7QlhZa5M8-VwVwpXiPzyGBQSjNz70Q_-aWQ1mgZOIlsQvMR4x3Xdyae9MWlj8XWvJ-ec8u7BG4nCHLcuRUmaN08XZiwXozGgN4gdVypOaSfi01MJJbTIWnthV15P-WUpRbHMOBQndc5dUHe0NyxjkOC0TD-BdK7uvrSk5U9p2SGkoQZ4a7lzx4yYzqPBlVPL7Q2oCFXhhtaor63AhNW8_AL5Em8sWLp-aEs6uz7cZX2sgaGURv1yvmxw==?c=mnaver.search.brand&t=0'));
+    document.getElementById('tab-lifeon')?.addEventListener('click', ()=> openLink('https://ader.naver.com/v1/UOhPt58SgJTO6Az6nXutN0u2pPMjVvaXu89S5MEBUSFXO2v2h9-XfXuZyf32T-L2kHXPTc48V5OPXnjCzZSxs5imeVZ7aD7x4snY9t1UCyqV7T2nGdwtnuA3LnmbapeLjfopGmhijUWKBW7_0O5nV5gS2gNeL2V0BOvUAUfv7AtHRe6tLk5e3vycILZFjgkm-aqGgPvMlF0qZF7_m1UHqD2dGJ5m9VizeqjccsO3_DCj-E-2nV3e9VsBOZsAqq3Jt9N2yk9p2xOIoL2zAVKEJqDUDyVoTh6EvU24hiHFMdyRA3lZJNeiSZpdrT145QtX?c=mnaver.search.brand&t=0'));
+    document.getElementById('tab-reon')?.addEventListener('click', ()=> openLink('https://m.cu.co.kr/mbranch/mai/MAI010001U'));
+    document.getElementById('tab-kakao')?.addEventListener('click', ()=> openLink('http://pf.kakao.com/_dIxgms'));
+    document.getElementById('tab-home')?.addEventListener('click', ()=> window.location.reload());
 
-  // 온뱅크 (네이버 광고 추적 링크)
-  document.getElementById('tab-onbank')?.addEventListener('click', () => {
-    openLink('https://ader.naver.com/v1/caL2Vp7db-KjGWa1VwH31E0TWLiyqkxUAEGlcU6Tq2FIV-pwfJZhwjIOqG7Xnb-8VVeSsiDME1Y3U8rgGLvmjMdBd95iES7QlhZa5M8-VwVwpXiPzyGBQSjNz70Q_-aWQ1mgZOIlsQvMR4x3Xdyae9MWlj8XWvJ-ec8u7BG4nCHLcuRUmaN08XZiwXozGgN4gdVypOaSfi01MJJbTIWnthV15P-WUpRbHMOBQndc5dUHe0NyxjkOC0TD-BdK7uvrSk5U9p2SGkoQZ4a7lzx4yYzqPBlVPL7Q2oCFXhhtaor63AhNW8_AL5Em8sWLp-aEs6uz7cZX2sgaGURv1yvmxw==?c=mnaver.search.brand&t=0');
-  });
+    // ==== 전화 메뉴 토글 ====
+    (function(){
+      const btn  = document.getElementById('callFabBtn');
+      const menu = document.getElementById('callMenu');
+      if(!btn || !menu) return;
 
-  // 라이프온 (네이버 광고 추적 링크)
-  document.getElementById('tab-lifeon')?.addEventListener('click', () => {
-    openLink('https://ader.naver.com/v1/UOhPt58SgJTO6Az6nXutN0u2pPMjVvaXu89S5MEBUSFXO2v2h9-XfXuZyf32T-L2kHXPTc48V5OPXnjCzZSxs5imeVZ7aD7x4snY9t1UCyqV7T2nGdwtnuA3LnmbapeLjfopGmhijUWKBW7_0O5nV5gS2gNeL2V0BOvUAUfv7AtHRe6tLk5e3vycILZFjgkm-aqGgPvMlF0qZF7_m1UHqD2dGJ5m9VizeqjccsO3_DCj-E-2nV3e9VsBOZsAqq3Jt9N2yk9p2xOIoL2zAVKEJqDUDyVoTh6EvU24hiHFMdyRA3lZJNeiSZpdrT145QtX?c=mnaver.search.brand&t=0');
-  });
-
-  // 리온브랜치
-  document.getElementById('tab-reon')?.addEventListener('click', () => {
-    openLink('https://m.cu.co.kr/mbranch/mai/MAI010001U');
-  });
-
-  // 카카오톡 채널
-  document.getElementById('tab-kakao')?.addEventListener('click', () => {
-    openLink('http://pf.kakao.com/_dIxgms');
-  });
-
-  // 메인화면: 새로고침
-  document.getElementById('tab-home')?.addEventListener('click', () => {
-    window.location.reload();
-  });
-
-    let centers=centersPx(), target={dx:0,dy:0}, cur={dx:0,dy:0};
-
-    function onMove(e){
-      const r=box.getBoundingClientRect();
-      const mx=Math.min(Math.max(e.clientX-r.left,0),r.width);
-      const my=Math.min(Math.max(e.clientY-r.top,0),r.height);
-      const cx=r.width/2, cy=r.height/2;
-      let dx=(mx-cx)/(r.width/2), dy=(my-cy)/(r.height/2);
-      const len=Math.hypot(dx,dy)||1; dx/=len; dy/=len;
-      target.dx=dx*range; target.dy=dy*range;
-    }
-    function reset(){target.dx=0;target.dy=0;}
-    function tick(){
-      const ease=0.22;
-      cur.dx+=(target.dx-cur.dx)*ease;
-      cur.dy+=(target.dy-cur.dy)*ease;
-      centers=centersPx();
-      pupils.forEach((p,i)=>{p.style.left=(centers[i].x+cur.dx)+'px';p.style.top=(centers[i].y+cur.dy)+'px';});
-      requestAnimationFrame(tick);
-    }
-    const header=document.querySelector('header')||document.body;
-    header.addEventListener('mousemove',onMove);
-    header.addEventListener('mouseleave',reset);
-    window.addEventListener('resize',()=>{centers=centersPx();});
-    tick();
-
+      function closeMenu(){
+        menu.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+      }
+      function toggleMenu(e){
+        e.stopPropagation();
+        menu.classList.toggle('open');
+        btn.setAttribute('aria-expanded', menu.classList.contains('open') ? 'true' : 'false');
+      }
+      btn.addEventListener('click', toggleMenu);
+      document.addEventListener('click', (e)=>{
+        if(!menu.contains(e.target) && e.target!==btn) closeMenu();
+      });
+      window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeMenu(); });
+    })();
   </script>
 
 </body>
