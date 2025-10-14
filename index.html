@@ -204,99 +204,89 @@
   </nav>
 
   <script>
-    // 탭 클릭 시 활성화
-    document.querySelectorAll('.tabbar .tab').forEach(tab=>{
-      tab.addEventListener('click', ()=>{
-        document.querySelectorAll('.tabbar .tab').forEach(t=>t.classList.remove('active'));
-        tab.classList.add('active');
-      });
+  // 탭 활성화 UI (그대로 유지해도 됨)
+  document.querySelectorAll('.tabbar .tab').forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      document.querySelectorAll('.tabbar .tab').forEach(t=>t.classList.remove('active'));
+      tab.classList.add('active');
     });
+  });
 
-    // 링크 오픈 헬퍼
-    function openLink(url){ window.location.href = url; }
+  // 스킴 먼저 시도 → 실패 시 스토어로 이동 (가장 호환 잘 되는 방식)
+  function openApp({ androidScheme, androidStore, iosScheme, iosStore, desktopFallback }) {
+    const ua = navigator.userAgent;
+    const isAndroid = /android/i.test(ua);
+    const isIOS = /iPad|iPhone|iPod/.test(ua);
 
-    // 앱 열기 함수
-    function openApp(options){
-      const { androidIntent, androidMarket, iosScheme, iosStore } = options;
-      const ua = navigator.userAgent;
-      const isAndroid = /android/i.test(ua);
-      const isIOS = /iPad|iPhone|iPod/.test(ua);
+    // visibilitychange 트릭: 앱 전환되면 페이지가 hidden → 폴백 취소
+    function tryOpen(scheme, store) {
+      let fallbackTimer;
+      const onVisibility = () => {
+        if (document.visibilityState === 'hidden') {
+          clearTimeout(fallbackTimer);
+          document.removeEventListener('visibilitychange', onVisibility);
+        }
+      };
+      document.addEventListener('visibilitychange', onVisibility);
 
-      if(isAndroid){
-        try{
-          window.location.href = androidIntent;
-          setTimeout(()=>{ window.location.href = androidMarket; }, 1500);
-        }catch(e){ window.location.href = androidMarket; }
-      }else if(isIOS){
-        const now = Date.now();
-        window.location.href = iosScheme;
-        setTimeout(()=>{
-          if(Date.now() - now < 1500) window.location.href = iosStore;
-        }, 1200);
-      }else{
-        window.location.href = androidMarket || iosStore || '#';
-      }
+      // 스킴 호출
+      window.location.href = scheme;
+
+      // 일정시간 내 전환이 없으면 스토어로
+      fallbackTimer = setTimeout(() => {
+        document.removeEventListener('visibilitychange', onVisibility);
+        if (store) window.location.href = store;
+      }, 1200);
     }
 
-    // 온뱅크
-    document.getElementById('tab-onbank').addEventListener('click', ()=>{
-      openApp({
-        androidIntent: 'intent://open#Intent;scheme=onbank;package=kr.co.cu.onbank;end',
-        androidMarket: 'https://play.google.com/store/apps/details?id=kr.co.cu.onbank&hl=ko',
-        iosScheme: 'onbank://',
-        iosStore: 'https://apps.apple.com/app/id1551032383'
-      });
-    });
+    if (isAndroid) {
+      tryOpen(androidScheme, androidStore || desktopFallback);
+    } else if (isIOS) {
+      tryOpen(iosScheme, iosStore || desktopFallback);
+    } else {
+      // 데스크톱 등: 스토어/웹 랜딩으로
+      window.location.href = desktopFallback || androidStore || iosStore || '#';
+    }
+  }
 
-    // 라이프온
-    document.getElementById('tab-lifeon').addEventListener('click', ()=>{
-      openApp({
-        androidIntent: 'intent://open#Intent;scheme=lifeon;package=kr.co.cu.lifeapp;end',
-        androidMarket: 'https://play.google.com/store/apps/details?id=kr.co.cu.lifeapp&hl=ko',
-        iosScheme: 'lifeon://',
-        iosStore: 'https://apps.apple.com/app/id6447442247'
-      });
+  // 온뱅크
+  document.getElementById('tab-onbank')?.addEventListener('click', () => {
+    openApp({
+      androidScheme: 'onbank://',  // ✅ 스킴 우선
+      androidStore: 'https://play.google.com/store/apps/details?id=kr.co.cu.onbank&hl=ko',
+      iosScheme: 'onbank://',
+      // App Store ID 모르면 검색 페이지로 폴백
+      iosStore: 'https://apps.apple.com/kr/search?term=%EC%98%A8%EB%B1%85%ED%81%AC',
+      desktopFallback: 'https://play.google.com/store/apps/details?id=kr.co.cu.onbank&hl=ko'
     });
+  });
 
-    // 리온브랜치
-    document.getElementById('tab-reon').addEventListener('click', ()=>{
-      openLink('https://m.cu.co.kr/mbranch/mai/MAI010001U');
+  // 라이프온
+  document.getElementById('tab-lifeon')?.addEventListener('click', () => {
+    openApp({
+      androidScheme: 'lifeon://',
+      androidStore: 'https://play.google.com/store/apps/details?id=kr.co.cu.lifeapp&hl=ko',
+      iosScheme: 'lifeon://',
+      iosStore: 'https://apps.apple.com/kr/search?term=%EB%9D%BC%EC%9D%B4%ED%94%84%EC%98%A8',
+      desktopFallback: 'https://play.google.com/store/apps/details?id=kr.co.cu.lifeapp&hl=ko'
     });
+  });
 
-    // 카카오톡
-    document.getElementById('tab-kakao').addEventListener('click', ()=>{
-      openLink('http://pf.kakao.com/_dIxgms');
-    });
+  // 리온브랜치
+  document.getElementById('tab-reon')?.addEventListener('click', () => {
+    window.location.href = 'https://m.cu.co.kr/mbranch/mai/MAI010001U';
+  });
 
-    // 메인화면 새로고침
-    document.getElementById('tab-home').addEventListener('click', ()=>{
-      window.location.reload();
-    });
+  // 카카오톡 채널
+  document.getElementById('tab-kakao')?.addEventListener('click', () => {
+    window.location.href = 'http://pf.kakao.com/_dIxgms';
+  });
 
-    // 눈동자 트래킹
-    (function(){
-      const box=document.getElementById('logoEye');
-      if(!box)return;
-      const pupils=[box.querySelector('.pupil-left'),box.querySelector('.pupil-right')];
-      const range=parseFloat(getComputedStyle(box).getPropertyValue('--pupil-range'))||3;
-      let target={dx:0,dy:0},cur={dx:0,dy:0};
-      function onMove(e){
-        const r=box.getBoundingClientRect();
-        const mx=e.clientX-r.left,my=e.clientY-r.top;
-        const dx=(mx-r.width/2)/(r.width/2),dy=(my-r.height/2)/(r.height/2);
-        const len=Math.hypot(dx,dy)||1;target.dx=(dx/len)*range;target.dy=(dy/len)*range;
-      }
-      function reset(){target.dx=0;target.dy=0;}
-      function tick(){
-        const ease=0.22;cur.dx+=(target.dx-cur.dx)*ease;cur.dy+=(target.dy-cur.dy)*ease;
-        pupils.forEach(p=>p.style.transform=`translate(calc(-50% + ${cur.dx}px),calc(-50% + ${cur.dy}px))`);
-        requestAnimationFrame(tick);
-      }
-      const header=document.querySelector('header');
-      header.addEventListener('mousemove',onMove);
-      header.addEventListener('mouseleave',reset);
-      tick();
-    })();
-  </script>
+  // 메인화면: 새로고침
+  document.getElementById('tab-home')?.addEventListener('click', () => {
+    window.location.reload();
+  });
+</script>
+
 </body>
 </html>
