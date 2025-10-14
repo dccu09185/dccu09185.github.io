@@ -204,7 +204,7 @@
   </nav>
 
   <script>
-  // 탭 활성화 UI (그대로 유지해도 됨)
+  // 탭 UI 활성화
   document.querySelectorAll('.tabbar .tab').forEach(tab=>{
     tab.addEventListener('click', ()=>{
       document.querySelectorAll('.tabbar .tab').forEach(t=>t.classList.remove('active'));
@@ -212,41 +212,9 @@
     });
   });
 
-  // 스킴 먼저 시도 → 실패 시 스토어로 이동 (가장 호환 잘 되는 방식)
-  function openApp({ androidScheme, androidStore, iosScheme, iosStore, desktopFallback }) {
-    const ua = navigator.userAgent;
-    const isAndroid = /android/i.test(ua);
-    const isIOS = /iPad|iPhone|iPod/.test(ua);
-
-    // visibilitychange 트릭: 앱 전환되면 페이지가 hidden → 폴백 취소
-    function tryOpen(scheme, store) {
-      let fallbackTimer;
-      const onVisibility = () => {
-        if (document.visibilityState === 'hidden') {
-          clearTimeout(fallbackTimer);
-          document.removeEventListener('visibilitychange', onVisibility);
-        }
-      };
-      document.addEventListener('visibilitychange', onVisibility);
-
-      // 스킴 호출
-      window.location.href = scheme;
-
-      // 일정시간 내 전환이 없으면 스토어로
-      fallbackTimer = setTimeout(() => {
-        document.removeEventListener('visibilitychange', onVisibility);
-        if (store) window.location.href = store;
-      }, 1200);
-    }
-
-    if (isAndroid) {
-      tryOpen(androidScheme, androidStore || desktopFallback);
-    } else if (isIOS) {
-      tryOpen(iosScheme, iosStore || desktopFallback);
-    } else {
-      // 데스크톱 등: 스토어/웹 랜딩으로
-      window.location.href = desktopFallback || androidStore || iosStore || '#';
-    }
+  // 앱/웹 링크 열기
+  function openLink(url) {
+    window.location.href = url;
   }
 
   // 온뱅크 (네이버 광고 추적 링크)
