@@ -25,7 +25,7 @@
     /* ===== 헤더 (세로 축소) ===== */
     header{
       background:linear-gradient(180deg,var(--brand1),var(--brand2));
-      padding:20px 22px 40px;
+      padding:20px 20px 2%;
       color:#fff;
       text-align:left;
       position:relative;
@@ -138,8 +138,8 @@
     <div class="card-list">
       <div class="card c1">
         <div class="text">
-          <div class="kicker">좋은 점 ①</div>
-          <div class="title">공란 추후 입력 예정</div>
+          <div class="kicker">비과세 혜택으로 이자소득세 1.4% 적용</div>
+          <div class="title">금리 안내</div>
           <div class="cta-row">→</div>
         </div>
         <div class="emoji"><img src="1.png"></div>
@@ -147,8 +147,8 @@
 
       <div class="card c2">
         <div class="text">
-          <div class="kicker">좋은 점 ②</div>
-          <div class="title">공란 추후 입력 예정</div>
+          <div class="kicker">체크카드·출자금·모임통장 등 다양한 이벤트 진행</div>
+          <div class="title">이벤트 안내</div>
           <div class="cta-row">→</div>
         </div>
         <div class="emoji"><img src="2.png"></div>
@@ -156,8 +156,8 @@
 
       <div class="card c3">
         <div class="text">
-          <div class="kicker">좋은 점 ③</div>
-          <div class="title">공란 추후 입력 예정</div>
+          <div class="kicker">비과세·금리우대·문화센터·건강검진 등 조합원 전용</div>
+          <div class="title">혜택 안내</div>
           <div class="cta-row">→</div>
         </div>
         <div class="emoji"><img src="3.png"></div>
@@ -168,8 +168,8 @@
          href="https://heyzine.com/flip-book/385aa0d3ef.html"
          target="_blank">
         <div class="text">
-          <div class="kicker">좋은 점 ④</div>
-          <div class="title">동촌신협 어부바플랜 선정업체</div>
+          <div class="kicker">지역 소상공인과 함께하는 상생 프로그램</div>
+          <div class="title">어부바플랜 안내</div>
           <div class="cta-row">→</div>
         </div>
         <div class="emoji"><img src="어부바플랜.png"></div>
@@ -247,22 +247,6 @@
     window.location.reload();
   });
 
-  /* === 눈동자 트래킹: 작은 반경 + 영역 이탈 방지 + 중앙 복귀 === */
-  (function(){
-    const box = document.getElementById('logoEye');
-    if(!box) return;
-
-    const pupils=[box.querySelector('.pupil-left'),box.querySelector('.pupil-right')];
-    const range=parseFloat(getComputedStyle(box).getPropertyValue('--pupil-range'))||3;
-
-    function centersPx(){
-      const r=box.getBoundingClientRect();
-      return pupils.map(p=>{
-        const cs=getComputedStyle(p);
-        return {x:(parseFloat(cs.left)/100)*r.width,y:(parseFloat(cs.top)/100)*r.height};
-      });
-    }
-
     let centers=centersPx(), target={dx:0,dy:0}, cur={dx:0,dy:0};
 
     function onMove(e){
@@ -288,7 +272,7 @@
     header.addEventListener('mouseleave',reset);
     window.addEventListener('resize',()=>{centers=centersPx();});
     tick();
-  })();
+
   </script>
 
 </body>
