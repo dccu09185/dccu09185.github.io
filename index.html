@@ -249,37 +249,24 @@
     }
   }
 
-  // 온뱅크
+  // 온뱅크 (네이버 광고 추적 링크)
   document.getElementById('tab-onbank')?.addEventListener('click', () => {
-    openApp({
-      androidScheme: 'onbank://',  // ✅ 스킴 우선
-      androidStore: 'https://play.google.com/store/apps/details?id=kr.co.cu.onbank&hl=ko',
-      iosScheme: 'onbank://',
-      // App Store ID 모르면 검색 페이지로 폴백
-      iosStore: 'https://apps.apple.com/kr/search?term=%EC%98%A8%EB%B1%85%ED%81%AC',
-      desktopFallback: 'https://play.google.com/store/apps/details?id=kr.co.cu.onbank&hl=ko'
-    });
+    openLink('https://ader.naver.com/v1/caL2Vp7db-KjGWa1VwH31E0TWLiyqkxUAEGlcU6Tq2FIV-pwfJZhwjIOqG7Xnb-8VVeSsiDME1Y3U8rgGLvmjMdBd95iES7QlhZa5M8-VwVwpXiPzyGBQSjNz70Q_-aWQ1mgZOIlsQvMR4x3Xdyae9MWlj8XWvJ-ec8u7BG4nCHLcuRUmaN08XZiwXozGgN4gdVypOaSfi01MJJbTIWnthV15P-WUpRbHMOBQndc5dUHe0NyxjkOC0TD-BdK7uvrSk5U9p2SGkoQZ4a7lzx4yYzqPBlVPL7Q2oCFXhhtaor63AhNW8_AL5Em8sWLp-aEs6uz7cZX2sgaGURv1yvmxw==?c=mnaver.search.brand&t=0');
   });
 
-  // 라이프온
+  // 라이프온 (네이버 광고 추적 링크)
   document.getElementById('tab-lifeon')?.addEventListener('click', () => {
-    openApp({
-      androidScheme: 'lifeon://',
-      androidStore: 'https://play.google.com/store/apps/details?id=kr.co.cu.lifeapp&hl=ko',
-      iosScheme: 'lifeon://',
-      iosStore: 'https://apps.apple.com/kr/search?term=%EB%9D%BC%EC%9D%B4%ED%94%84%EC%98%A8',
-      desktopFallback: 'https://play.google.com/store/apps/details?id=kr.co.cu.lifeapp&hl=ko'
-    });
+    openLink('https://ader.naver.com/v1/UOhPt58SgJTO6Az6nXutN0u2pPMjVvaXu89S5MEBUSFXO2v2h9-XfXuZyf32T-L2kHXPTc48V5OPXnjCzZSxs5imeVZ7aD7x4snY9t1UCyqV7T2nGdwtnuA3LnmbapeLjfopGmhijUWKBW7_0O5nV5gS2gNeL2V0BOvUAUfv7AtHRe6tLk5e3vycILZFjgkm-aqGgPvMlF0qZF7_m1UHqD2dGJ5m9VizeqjccsO3_DCj-E-2nV3e9VsBOZsAqq3Jt9N2yk9p2xOIoL2zAVKEJqDUDyVoTh6EvU24hiHFMdyRA3lZJNeiSZpdrT145QtX?c=mnaver.search.brand&t=0');
   });
 
   // 리온브랜치
   document.getElementById('tab-reon')?.addEventListener('click', () => {
-    window.location.href = 'https://m.cu.co.kr/mbranch/mai/MAI010001U';
+    openLink('https://m.cu.co.kr/mbranch/mai/MAI010001U');
   });
 
   // 카카오톡 채널
   document.getElementById('tab-kakao')?.addEventListener('click', () => {
-    window.location.href = 'http://pf.kakao.com/_dIxgms';
+    openLink('http://pf.kakao.com/_dIxgms');
   });
 
   // 메인화면: 새로고침
