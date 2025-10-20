@@ -19,96 +19,68 @@
     .title-wrap h1{margin:0;font-size:34px;font-weight:900;letter-spacing:-.2px}
     .title-wrap p{margin:6px 0 0;font-size:16px;color:#eaf1ff;font-weight:600}
 
-     /* ===== 메인 카드 ===== */
-  main{max-width:960px;margin:16px auto 110px;padding:0 16px}
-  .card-list{display:flex;flex-direction:column;gap:16px}
-  .card{
-    display:flex;align-items:center;justify-content:space-between;
-    min-height:120px;padding:22px;border-radius:var(--radius);
-    background:#fff;border:1px solid #e8ecf5;
-    box-shadow:var(--shadow);position:relative;overflow:hidden;
-    transition:transform .15s ease,filter .15s ease
-  }
-  .card:hover{transform:translateY(-2px);filter:saturate(1.05)}
-  .text{max-width:72%;display:flex;flex-direction:column;justify-content:center}
-  .kicker{opacity:.95;font-size:13px;margin-bottom:6px}
-  .title{font-size:20px;font-weight:800;line-height:1.25;letter-spacing:-.2px}
-  .cta-row{margin-top:10px;font-size:20px;opacity:.9}
-  .emoji{display:flex;justify-content:flex-end;align-items:center;margin-left:12px}
-  .emoji img{width:54px;display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,.15))}
+    /* ===== 메인 카드 ===== */
+    main {
+      max-width: 960px;
+      margin: 16px auto 110px;
+      padding: 0 16px;
+    }
+    .card-list {display:flex;flex-direction:column;gap:16px}
+    .card{
+      display:flex;align-items:center;justify-content:space-between;
+      min-height:120px;padding:22px;border-radius:var(--radius);
+      background:#fff;border:1px solid #e8ecf5;box-shadow:var(--shadow);
+      position:relative;overflow:hidden;transition:all .2s ease;
+    }
+    .card:hover{transform:translateY(-3px);filter:saturate(1.1);border-color:var(--accent);box-shadow:0 8px 22px rgba(0,0,0,.12)}
+    .text{max-width:72%;display:flex;flex-direction:column;justify-content:center}
+    .kicker{opacity:.95;font-size:13px;margin-bottom:6px;transition:color .2s ease}
+    .title{font-size:20px;font-weight:800;line-height:1.25;letter-spacing:-.2px;transition:color .2s ease}
+    .cta-row{margin-top:10px;font-size:20px;opacity:.9;transition:color .2s ease}
+    .emoji{display:flex;justify-content:flex-end;align-items:center;margin-left:12px}
+    .emoji img{width:54px;display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,.15));transition:transform .2s ease}
+    .card:hover .emoji img{transform:scale(1.05)}
 
-  /* 카드별 포인트 컬러 지정 */
-  .c1{--accent:#2F78F6;}
-  .c2{--accent:#0E7E83;}
-  .c3{--accent:#073A8F;}
-  .c4{--accent:#2A7BF6;}
-
-  /* 텍스트 컬러 변경 */
-  .c1 .kicker,.c1 .title,.c1 .cta-row{color:var(--accent)}
-  .c2 .kicker,.c2 .title,.c2 .cta-row{color:var(--accent)}
-  .c3 .kicker,.c3 .title,.c3 .cta-row{color:var(--accent)}
-  .c4 .kicker,.c4 .title,.c4 .cta-row{color:var(--accent)}
-
-  /* 왼쪽 컬러 라인(선택사항) */
-  .card::before{
-    content:"";position:absolute;left:0;top:0;bottom:0;width:6px;
-    background:var(--accent);opacity:.18;
-    border-top-left-radius:var(--radius);
-    border-bottom-left-radius:var(--radius);
-  }
+    /* 카드별 포인트 컬러 */
+    .c1{--accent:#2F78F6}.c2{--accent:#0E7E83}.c3{--accent:#073A8F}.c4{--accent:#2A7BF6}
+    .c1 .kicker,.c1 .title,.c1 .cta-row{color:var(--accent)}
+    .c2 .kicker,.c2 .title,.c2 .cta-row{color:var(--accent)}
+    .c3 .kicker,.c3 .title,.c3 .cta-row{color:var(--accent)}
+    .c4 .kicker,.c4 .title,.c4 .cta-row{color:var(--accent)}
+    .card:hover .kicker,.card:hover .title,.card:hover .cta-row{color:color-mix(in srgb, var(--accent) 90%, black)}
+    .card::before{
+      content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--accent);opacity:.18;
+      border-top-left-radius:var(--radius);border-bottom-left-radius:var(--radius);transition:opacity .2s ease;
+    }
+    .card:hover::before{opacity:.35}
 
     /* ===== 체크카드 캐러셀 ===== */
     .shelf-wrap{margin-top:28px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}
     .shelf-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
     .shelf-head h2{margin:0;font-size:18px;font-weight:800}
     .shelf-ctrl{display:flex;align-items:center;gap:8px}
-    .shelf-btn{
-      width:36px;height:36px;border-radius:10px;border:1px solid #e6ecff;background:#f7faff;
-      display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.06)
-    }
+    .shelf-btn{width:36px;height:36px;border-radius:10px;border:1px solid #e6ecff;background:#f7faff;
+      display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.06)}
     .shelf-btn:active{transform:translateY(1px)}
-
-    /* ✅ 자세히보기 링크(박스) */
-    .more-link{
-      font-size:13px;font-weight:700;color:var(--brand2);
-      padding:12px;border:1px solid #dbe4ff;background:#f7faff;border-radius:12px;
-      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
-      width:130px;line-height:1.35;text-align:center;white-space:normal;
-    }
+    .more-link{font-size:13px;font-weight:700;color:var(--brand2);padding:12px;border:1px solid #dbe4ff;background:#f7faff;border-radius:12px;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:130px;line-height:1.35;text-align:center;white-space:normal}
     .more-link:hover{text-decoration:underline}
-    .more-text{display:block}
-    .more-arrow{font-size:18px;font-weight:800;line-height:1}
-
-    .shelf{
-      display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,1fr);
-      gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;
-    }
-    .shelf::-webkit-scrollbar{height:8px}
-    .shelf::-webkit-scrollbar-thumb{background:#e6ecff;border-radius:10px}
-    .shelf-card{
-      scroll-snap-align:start;border:1px solid #e8ecf5;border-radius:16px;overflow:hidden;
-      background:#fff;box-shadow:0 6px 16px rgba(0,0,0,.06)
-    }
-    .shelf-card__img{
-      height:240px;background:#eef2f9;display:flex;align-items:center;justify-content:center;overflow:hidden;
-    }
+    .more-text{display:block}.more-arrow{font-size:18px;font-weight:800;line-height:1}
+    .shelf{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,1fr);gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}
+    .shelf::-webkit-scrollbar{height:8px}.shelf::-webkit-scrollbar-thumb{background:#e6ecff;border-radius:10px}
+    .shelf-card{scroll-snap-align:start;border:1px solid #e8ecf5;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 6px 16px rgba(0,0,0,.06);transition:.15s ease}
+    .shelf-card__img{height:240px;background:#eef2f9;display:flex;align-items:center;justify-content:center;overflow:hidden}
     .shelf-card__img img{height:100%;width:auto;object-fit:contain;display:block;border-radius:10px}
-    .shelf-card__body{padding:12px}
-    .shelf-card__title{font-weight:800}
+    .shelf-card__body{padding:12px}.shelf-card__title{font-weight:800}
     .shelf-card__desc{font-size:13px;color:#64748b;margin-top:4px;line-height:1.45}
     .shelf-card:hover{transform:translateY(-2px);transition:.15s ease}
-
-    /* 👉 '자세히보기' 카드 전용 */
-    .shelf-more{
-      display:flex;align-items:center;justify-content:center;min-height:240px;
-      border:1px dashed #dbe4ff;background:#f9fbff;
-    }
+    .shelf-more{display:flex;align-items:center;justify-content:center;min-height:240px;border:1px dashed #dbe4ff;background:#f9fbff}
     .shelf-more .more-link{background:#fff}
 
     /* ===== 하단 탭 ===== */
     .tabbar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #e9eef6;
       display:flex;justify-content:space-around;gap:6px;padding:10px 6px 12px;z-index:20}
-    .tab{display:flex;flex-direction:column;align-items:center;gap:6px;color:#4b5563;font-size:12px;cursor:pointer}
+    .tab{display:flex;flex-direction:column;align-items:center;gap:6px;color:#4b5563;font-size:12px;cursor:pointer;position:relative}
     .tab.active{color:var(--brand2);font-weight:700}
     .tab--img .ico{width:40px;height:40px;display:grid;place-items:center}
     .tab--img .ico img{width:100%;height:100%;object-fit:contain;display:block;transition:transform .2s ease}
@@ -145,22 +117,55 @@
     .call-item a:hover{background:#f5f8ff}
     .call-item a:active{transform:translateY(1px)}
 
+/* ===== SNS 메뉴 (오른쪽 하단) ===== */
+.tab--sns .ico{width:40px;height:40px;display:grid;place-items:center}
+
+.sns-trigger{
+  width:40px;height:40px;border-radius:12px;border:1px solid #e7ecf6;background:#f9fbff;
+  display:grid;place-items:center;box-shadow:0 6px 14px rgba(0,0,0,.06);cursor:pointer;
+}
+.sns-trigger span{
+  display:block;width:18px;height:2px;background:#425067;border-radius:2px;
+}
+/* 👉 햄버거 줄 간격 살짝 축소 */
+.sns-trigger span+span{margin-top:3px}
+
+.tab--sns.active .sns-trigger{border-color:#cfe0ff}
+
+.sns-menu{
+  position:absolute;right:0;bottom:58px;width:280px;background:#fff;border:1px solid #e6ecff;border-radius:16px;
+  box-shadow:0 18px 38px rgba(0,0,0,.16);overflow:hidden;opacity:0;pointer-events:none;transform:translateY(6px);
+  transition:.18s ease; backdrop-filter: blur(2px);
+}
+.sns-menu.open{opacity:1;pointer-events:auto;transform:translateY(0)}
+.sns-head{
+  padding:12px 16px;background:linear-gradient(90deg,#eef4ff,#f7faff);
+  border-bottom:1px solid #eef3ff;font-weight:800;color:#0D56E2
+}
+.sns-list{padding:6px}
+.sns-item a{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px}
+.sns-item + .sns-item{margin-top:4px}
+
+/* ▶ PNG 아이콘 사용 */
+.sns-ico{
+  width:38px;height:38px;border-radius:10px;display:grid;place-items:center;
+  background:#f5f8ff;border:1px solid #e8ecf5;
+}
+.sns-ico img{width:22px;height:22px;display:block;object-fit:contain}
+
+/* 텍스트 – 제목만 */
+.sns-item .label{font-size:14px;font-weight:800;color:#0f172a}
+
+.sns-item a:hover{background:#f5f8ff}
+
     /* ===== 푸터 ===== */
-    footer{
-      background:#fff;border-top:1px solid #e9eef6;margin:24px 0 96px; /* 탭바 공간 고려 */
-    }
-    .footer-inner{
-      max-width:960px;margin:0 auto;padding:18px 16px;
-      display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;
-      color:#64748b;font-size:13px;
-    }
+    footer{background:#fff;border-top:1px solid #e9eef6;margin:24px 0 96px}
+    .footer-inner{max-width:960px;margin:0 auto;padding:18px 16px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;color:#64748b;font-size:13px}
     .footer-brand{display:flex;align-items:center;gap:10px}
     .footer-brand img{height:28px;width:auto;display:block}
     .footer-slogan{margin:0;color:#4b5563;font-weight:600}
     .footer-copy{margin:2px 0 0}
-    @media(min-width:680px){
-      .footer-inner{flex-direction:column}
-    }
+    @media(min-width:680px){.footer-inner{flex-direction:column}}
   </style>
 </head>
 <body>
@@ -293,7 +298,6 @@
           </div>
         </article>
 
-        <!-- 자세히보기 카드 -->
         <article class="shelf-card shelf-more">
           <a class="more-link" href="https://www.cu.co.kr/product/ad/card/selectCardList.do?mi=100253&searchCardTyCode=check" target="_blank" rel="noopener">
             <span class="more-text">체크카드<br>자세히보기</span>
@@ -310,13 +314,52 @@
     <div class="tab tab--img" id="tab-lifeon"><div class="ico"><img src="라이프온.png" alt="라이프온"></div>라이프온</div>
     <div class="tab tab--home active" id="tab-home"><div class="bubble"><img class="bubble__icon" src="홈.png" alt="홈"></div>메인화면</div>
     <div class="tab tab--img" id="tab-reon"><div class="ico"><img src="리온브랜치.png" alt="리온브랜치"></div>리온브랜치</div>
-    <div class="tab tab--img" id="tab-kakao"><div class="ico"><img src="카카오톡.png" alt="카카오톡"></div>카카오톡</div>
-  </nav>
+
+    <!-- ▶ 기존 '카카오톡' 탭 제거, SNS 탭 추가 -->
+    <div class="tab tab--sns" id="tab-sns">
+      <div class="ico">
+        <button class="sns-trigger" id="snsTrigger" aria-haspopup="true" aria-expanded="false" aria-controls="snsMenu" aria-label="SNS 열기">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      SNS
+<!-- 팝오버 메뉴 -->
+<div class="sns-menu" id="snsMenu" role="menu" aria-label="동촌신협 SNS">
+  <div class="sns-head">동촌신협 SNS</div>
+  <div class="sns-list">
+    <div class="sns-item">
+      <a href="https://blog.naver.com/dccu09185" target="_blank" rel="noopener" role="menuitem">
+        <div class="sns-ico"><img src="블로그.png" alt=""></div>
+        <div class="label">네이버 블로그</div>
+      </a>
+    </div>
+    <div class="sns-item">
+      <a href="https://www.instagram.com/여기에_계정" target="_blank" rel="noopener" role="menuitem">
+        <div class="sns-ico"><img src="인스타.png" alt=""></div>
+        <div class="label">인스타그램</div>
+      </a>
+    </div>
+    <div class="sns-item">
+      <a href="https://www.facebook.com/여기에_페이지" target="_blank" rel="noopener" role="menuitem">
+        <div class="sns-ico"><img src="페이스북.png" alt=""></div>
+        <div class="label">페이스북</div>
+      </a>
+    </div>
+    <div class="sns-item">
+      <a href="http://pf.kakao.com/_dIxgms" target="_blank" rel="noopener" role="menuitem">
+        <div class="sns-ico"><img src="카카오톡.png" alt=""></div>
+        <div class="label">카카오톡 채널</div>
+      </a>
+    </div>
+  </div>
+</div>
+
 
   <script>
-    // 탭 활성화
+    // 탭 활성화 (SNS 탭은 예외 처리)
     document.querySelectorAll('.tabbar .tab').forEach(tab=>{
-      tab.addEventListener('click', ()=>{
+      tab.addEventListener('click', (e)=>{
+        if(tab.id === 'tab-sns') return; // SNS 탭은 별도 토글
         document.querySelectorAll('.tabbar .tab').forEach(t=>t.classList.remove('active'));
         tab.classList.add('active');
       });
@@ -327,7 +370,6 @@
     document.getElementById('tab-onbank')?.addEventListener('click',()=>openLink('https://ader.naver.com/v1/caL2Vp7db-KjGWa1VwH31E0TWLiyqkxUAEGlcU6Tq2FIV-pwfJZhwjIOqG7Xnb-8VVeSsiDME1Y3U8rgGLvmjMdBd95iES7QlhZa5M8-VwVwpXiPzyGBQSjNz70Q_-aWQ1mgZOIlsQvMR4x3Xdyae9MWlj8XWvJ-ec8u7BG4nCHLcuRUmaN08XZiwXozGgN4gdVypOaSfi01MJJbTIWnthV15P-WUpRbHMOBQndc5dUHe0NyxjkOC0TD-BdK7uvrSk5U9p2SGkoQZ4a7lzx4yYzqPBlVPL7Q2oCFXhhtaor63AhNW8_AL5Em8sWLp-aEs6uz7cZX2sgaGURv1yvmxw==?c=mnaver.search.brand&t=0'));
     document.getElementById('tab-lifeon')?.addEventListener('click',()=>openLink('https://ader.naver.com/v1/UOhPt58SgJTO6Az6nXutN0u2pPMjVvaXu89S5MEBUSFXO2v2h9-XfXuZyf32T-L2kHXPTc48V5OPXnjCzZSxs5imeVZ7aD7x4snY9t1UCyqV7T2nGdwtnuA3LnmbapeLjfopGmhijUWKBW7_0O5nV5gS2gNeL2V0BOvUAUfv7AtHRe6tLk5e3vycILZFjgkm-aqGgPvMlF0qZF7_m1UHqD2dGJ5m9VizeqjccsO3_DCj-E-2nV3e9VsBOZsAqq3Jt9N2yk9p2xOIoL2zAVKEJqDUDyVoTh6EvU24hiHFMdyRA3lZJNeiSZpdrT145QtX?c=mnaver.search.brand&t=0'));
     document.getElementById('tab-reon')?.addEventListener('click',()=>openLink('https://m.cu.co.kr/mbranch/mai/MAI010001U'));
-    document.getElementById('tab-kakao')?.addEventListener('click',()=>openLink('http://pf.kakao.com/_dIxgms'));
     document.getElementById('tab-home')?.addEventListener('click',()=>window.location.reload());
 
     // 전화 메뉴 토글
@@ -350,6 +392,27 @@
       const step=260;
       prev.addEventListener('click',()=>shelf.scrollBy({left:-step,behavior:'smooth'}));
       next.addEventListener('click',()=>shelf.scrollBy({left: step,behavior:'smooth'}));
+    })();
+
+    // SNS 팝오버 토글
+    (function(){
+      const trigger=document.getElementById('snsTrigger');
+      const menu=document.getElementById('snsMenu');
+      const tab=document.getElementById('tab-sns');
+      if(!trigger||!menu) return;
+
+      const close=()=>{menu.classList.remove('open');trigger.setAttribute('aria-expanded','false');tab.classList.remove('active')}
+      const toggle=(e)=>{e.stopPropagation();menu.classList.toggle('open');
+        const open=menu.classList.contains('open');
+        trigger.setAttribute('aria-expanded', open ? 'true':'false');
+        tab.classList.toggle('active', open);
+      }
+
+      trigger.addEventListener('click',toggle);
+      document.addEventListener('click',e=>{
+        if(!menu.contains(e.target) && e.target!==trigger){ close(); }
+      });
+      window.addEventListener('keydown',e=>{ if(e.key==='Escape') close(); });
     })();
   </script>
 
