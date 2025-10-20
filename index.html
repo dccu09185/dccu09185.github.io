@@ -63,8 +63,6 @@
     .shelf-card__img{
       height:140px;background:#eef2f9;display:grid;place-items:center;
       color:#6b7280;font-size:13px;letter-spacing:.2px
-      /* 나중에 실제 이미지 넣을 땐 아래처럼:
-         background:#eef2f9 url('이미지경로') center/cover no-repeat; color:transparent; */
     }
     .shelf-card__body{padding:12px}
     .shelf-card__title{font-weight:800}
@@ -164,11 +162,43 @@
   <main>
     <!-- 상단 네 가지 안내 카드 -->
     <div class="card-list">
-      <div class="card c1"><div class="text"><div class="kicker">비과세 혜택으로 이자소득세 1.4% 적용</div><div class="title">금리 안내</div><div class="cta-row">→</div></div><div class="emoji"><img src="1.png" alt=""></div></div>
-      <div class="card c2"><div class="text"><div class="kicker">체크카드·출자금·모임통장 등 다양한 이벤트 진행</div><div class="title">이벤트 안내</div><div class="cta-row">→</div></div><div class="emoji"><img src="2.png" alt=""></div></div>
-      <div class="card c3"><div class="text"><div class="kicker">비과세·금리우대·문화센터·건강검진 등 조합원 전용</div><div class="title">혜택 안내</div><div class="cta-row">→</div></div><div class="emoji"><img src="3.png" alt=""></div></div>
+      <!-- 금리 안내: 블로그 글 링크 -->
+      <a class="card c1" href="https://blog.naver.com/PostView.naver?blogId=dccu09185&logNo=223047580712&categoryNo=7&parentCategoryNo=&from=thumbnailList" target="_blank" rel="noopener">
+        <div class="text">
+          <div class="kicker">비과세 혜택으로 이자소득세 1.4% 적용</div>
+          <div class="title">금리 안내</div>
+          <div class="cta-row">→</div>
+        </div>
+        <div class="emoji"><img src="금리.png" alt=""></div>
+      </a>
+
+      <!-- 이벤트 안내: 블로그 카테고리 링크 -->
+      <a class="card c2" href="https://blog.naver.com/PostList.naver?blogId=dccu09185&from=postList&categoryNo=8" target="_blank" rel="noopener">
+        <div class="text">
+          <div class="kicker">체크카드·출자금·모임통장 등 다양한 이벤트 진행</div>
+          <div class="title">이벤트 안내</div>
+          <div class="cta-row">→</div>
+        </div>
+        <div class="emoji"><img src="이벤트.png" alt=""></div>
+      </a>
+
+      <!-- 혜택 안내: 폴더 방식 두번째 페이지로 연결 -->
+      <a class="card c3" href="/benefits/" target="_blank" rel="noopener">
+        <div class="text">
+          <div class="kicker">비과세·금리우대·문화센터·건강검진 등 조합원 전용</div>
+          <div class="title">혜택 안내</div>
+          <div class="cta-row">→</div>
+        </div>
+        <div class="emoji"><img src="1.png" alt=""></div>
+      </a>
+
+      <!-- 어부바플랜: 기존 링크 유지 -->
       <a class="card c4" href="https://heyzine.com/flip-book/385aa0d3ef.html" target="_blank" rel="noopener">
-        <div class="text"><div class="kicker">지역 소상공인과 함께하는 상생 프로그램</div><div class="title">어부바플랜 안내</div><div class="cta-row">→</div></div>
+        <div class="text">
+          <div class="kicker">지역 소상공인과 함께하는 상생 프로그램</div>
+          <div class="title">어부바플랜 안내</div>
+          <div class="cta-row">→</div>
+        </div>
         <div class="emoji"><img src="어부바플랜.png" alt=""></div>
       </a>
     </div>
