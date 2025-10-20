@@ -44,12 +44,26 @@
     .shelf-wrap{margin-top:28px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}
     .shelf-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
     .shelf-head h2{margin:0;font-size:18px;font-weight:800}
-    .shelf-ctrl{display:flex;gap:8px}
+    .shelf-ctrl{display:flex;align-items:center;gap:8px}
     .shelf-btn{
       width:36px;height:36px;border-radius:10px;border:1px solid #e6ecff;background:#f7faff;
       display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.06)
     }
     .shelf-btn:active{transform:translateY(1px)}
+
+    /* ✅ 자세히보기 링크(박스) 스타일: 가운데 정렬 + 폭 고정 + 내부에 화살표 */
+    .more-link{
+      font-size:13px;font-weight:700;color:var(--brand2);
+      padding:8px 12px;border:1px solid #dbe4ff;background:#f7faff;border-radius:10px;
+      display:flex;flex-direction:columnalign-items:center;       /* 🔹가로 가운데 */
+  justify-content:center;   /* 🔹세로 가운데 */;gap:6px;
+      width:120px;             /* 폭 고정 */
+      line-height:1.4;text-align:center;white-space:normal;
+    }
+    .more-link:hover{text-decoration:underline}
+    .more-text{display:block}
+    .more-arrow{align-self:flex-end;font-size:18px;font-weight:800;line-height:1}
+
     .shelf{
       display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,1fr);
       gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;
@@ -60,15 +74,24 @@
       scroll-snap-align:start;border:1px solid #e8ecf5;border-radius:16px;overflow:hidden;
       background:#fff;box-shadow:0 6px 16px rgba(0,0,0,.06)
     }
+    /* 세로 카드 이미지 */
     .shelf-card__img{
-      height:140px;background:#eef2f9;display:grid;place-items:center;
-      color:#6b7280;font-size:13px;letter-spacing:.2px
+      height:240px;background:#eef2f9;display:flex;align-items:center;justify-content:center;overflow:hidden;
+    }
+    .shelf-card__img img{
+      height:100%;width:auto;object-fit:contain;display:block;border-radius:10px;
     }
     .shelf-card__body{padding:12px}
     .shelf-card__title{font-weight:800}
-    .shelf-card__desc{font-size:13px;color:#64748b;margin-top:4px}
-    .shelf-card a{display:block}
+    .shelf-card__desc{font-size:13px;color:#64748b;margin-top:4px;line-height:1.45}
     .shelf-card:hover{transform:translateY(-2px);transition:.15s ease}
+
+    /* 👉 '자세히보기' 카드 전용 */
+    .shelf-more{
+      display:flex;align-items:center;justify-content:center;min-height:240px;
+      border:1px dashed #dbe4ff;background:#f9fbff;
+    }
+    .shelf-more .more-link{background:#fff}
 
     /* ===== 하단 탭 ===== */
     .tabbar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #e9eef6;
@@ -162,7 +185,7 @@
   <main>
     <!-- 상단 네 가지 안내 카드 -->
     <div class="card-list">
-      <!-- 금리 안내: 블로그 글 링크 -->
+      <!-- 금리 안내 -->
       <a class="card c1" href="https://blog.naver.com/PostView.naver?blogId=dccu09185&logNo=223047580712&categoryNo=7&parentCategoryNo=&from=thumbnailList" target="_blank" rel="noopener">
         <div class="text">
           <div class="kicker">비과세 혜택으로 이자소득세 1.4% 적용</div>
@@ -172,7 +195,7 @@
         <div class="emoji"><img src="금리.png" alt=""></div>
       </a>
 
-      <!-- 이벤트 안내: 블로그 카테고리 링크 -->
+      <!-- 이벤트 안내 -->
       <a class="card c2" href="https://blog.naver.com/PostList.naver?blogId=dccu09185&from=postList&categoryNo=8" target="_blank" rel="noopener">
         <div class="text">
           <div class="kicker">체크카드·출자금·모임통장 등 다양한 이벤트 진행</div>
@@ -182,7 +205,7 @@
         <div class="emoji"><img src="이벤트.png" alt=""></div>
       </a>
 
-      <!-- 혜택 안내: 폴더 방식 두번째 페이지로 연결 -->
+      <!-- 혜택 안내: 두번째 페이지 -->
       <a class="card c3" href="/benefits/" target="_blank" rel="noopener">
         <div class="text">
           <div class="kicker">비과세·금리우대·문화센터·건강검진 등 조합원 전용</div>
@@ -192,7 +215,7 @@
         <div class="emoji"><img src="1.png" alt=""></div>
       </a>
 
-      <!-- 어부바플랜: 기존 링크 유지 -->
+      <!-- 어부바플랜 -->
       <a class="card c4" href="https://heyzine.com/flip-book/385aa0d3ef.html" target="_blank" rel="noopener">
         <div class="text">
           <div class="kicker">지역 소상공인과 함께하는 상생 프로그램</div>
@@ -214,47 +237,89 @@
       </div>
 
       <div class="shelf" id="cardShelf">
-        <!-- 카드 1 -->
+        <!-- 1. 신협어부바 체크카드 -->
         <article class="shelf-card">
-          <a href="https://www.naver.com" target="_blank" rel="noopener">
-            <div class="shelf-card__img">이미지 영역 (가로 3:2 권장)</div>
-            <div class="shelf-card__body">
-              <div class="shelf-card__title">동촌 신협 체크카드 A</div>
-              <div class="shelf-card__desc">간편한 혜택, 일상 사용에 최적</div>
+          <div class="shelf-card__img">
+            <img src="어부바.png" alt="신협어부바 체크카드">
+          </div>
+          <div class="shelf-card__body">
+            <div class="shelf-card__title">신협어부바 체크카드</div>
+            <div class="shelf-card__desc">
+              · 화요일 10% (편의점·커피·패스트푸드)<br>
+              · 도서·로드샵·렌터카 5%<br>
+              · 영화·응시료·통신요금 각 3,000원 캐시백
             </div>
+          </div>
+        </article>
+
+        <!-- 2. 장보고 체크카드 -->
+        <article class="shelf-card">
+          <div class="shelf-card__img">
+            <img src="장보고.png" alt="장보고 체크카드">
+          </div>
+          <div class="shelf-card__body">
+            <div class="shelf-card__title">장보고 체크카드</div>
+            <div class="shelf-card__desc">
+              · 전통시장/하나로마트 <br>
+              · 영화·커피·통신비 <br>
+              ※ 건당 1만원 이상 결제 시 2,000원 캐시백
+            </div>
+          </div>
+        </article>
+
+        <!-- 3. 세로움 체크카드 -->
+        <article class="shelf-card">
+          <div class="shelf-card__img">
+            <img src="세로움.png" alt="세로움 체크카드">
+          </div>
+          <div class="shelf-card__body">
+            <div class="shelf-card__title">세로움 체크카드</div>
+            <div class="shelf-card__desc">
+              · 1만원 이상 0.2% 캐시백<br>
+              · 5만원 이상 0.5% 캐시백<br>
+              · 국세·지방세 0.2% 캐시백
+            </div>
+          </div>
+        </article>
+
+        <!-- 4. 귀여워 체크카드 -->
+        <article class="shelf-card">
+          <div class="shelf-card__img">
+            <img src="귀여워.png" alt="귀여워 체크카드">
+          </div>
+          <div class="shelf-card__body">
+            <div class="shelf-card__title">귀여워 체크카드</div>
+            <div class="shelf-card__desc">
+              · 700~6,999원 결제 70원 캐시백<br>
+              · 7,000원 이상 700원 캐시백 (월 7회)
+            </div>
+          </div>
+        </article>
+
+        <!-- 5. Cubig SIMPLE 하이브리드 -->
+        <article class="shelf-card">
+          <div class="shelf-card__img">
+            <img src="하이브리드.png" alt="Cubig SIMPLE 하이브리드">
+          </div>
+          <div class="shelf-card__body">
+            <div class="shelf-card__title">Cubig SIMPLE 하이브리드</div>
+            <div class="shelf-card__desc">
+              1만원 이상 0.3% 캐시백<br>
+              5만원 이상 0.5% 캐시백<br>
+              주말/공휴일 0.1% 추가 캐시백
+            </div>
+          </div>
+        </article>
+
+        <!-- 👉 오른쪽 ‘체크카드 자세히보기’ 카드 (박스 내부에 화살표 포함) -->
+        <article class="shelf-card shelf-more">
+          <a class="more-link"
+             href="https://www.cu.co.kr/product/ad/card/selectCardList.do?mi=100253&searchCardTyCode=check"
+             target="_blank" rel="noopener">
+            <span class="more-text">체크카드<br>자세히보기</span>
+            <span class="more-arrow" aria-hidden="true">→</span>
           </a>
         </article>
-        <!-- 카드 2 -->
-        <article class="shelf-card">
-          <a href="https://www.naver.com" target="_blank" rel="noopener">
-            <div class="shelf-card__img">이미지 영역</div>
-            <div class="shelf-card__body">
-              <div class="shelf-card__title">동촌 신협 체크카드 B</div>
-              <div class="shelf-card__desc">교통/편의점 캐시백 특화</div>
-            </div>
-          </a>
-        </article>
-        <!-- 카드 3 -->
-        <article class="shelf-card">
-          <a href="https://www.naver.com" target="_blank" rel="noopener">
-            <div class="shelf-card__img">이미지 영역</div>
-            <div class="shelf-card__body">
-              <div class="shelf-card__title">동촌 신협 체크카드 C</div>
-              <div class="shelf-card__desc">온라인 쇼핑 할인형</div>
-            </div>
-          </a>
-        </article>
-        <!-- 카드 4 -->
-        <article class="shelf-card">
-          <a href="https://www.naver.com" target="_blank" rel="noopener">
-            <div class="shelf-card__img">이미지 영역</div>
-            <div class="shelf-card__body">
-              <div class="shelf-card__title">동촌 신협 체크카드 D</div>
-              <div class="shelf-card__desc">해외 결제 수수료 절감</div>
-            </div>
-          </a>
-        </article>
-        <!-- 필요 시 더 추가 -->
       </div>
     </section>
   </main>
@@ -302,7 +367,7 @@
       const shelf=document.getElementById('cardShelf');
       const prev=document.getElementById('prevBtn');
       const next=document.getElementById('nextBtn');
-      const step=260; // 한 번에 이동할 픽셀 (카드 너비 대략)
+      const step=260;
       prev.addEventListener('click',()=>shelf.scrollBy({left:-step,behavior:'smooth'}));
       next.addEventListener('click',()=>shelf.scrollBy({left: step,behavior:'smooth'}));
     })();
