@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>동촌신협 | 혜택 안내</title>
+  <style>
+    :root{ --brand1:#2A7BF6; --brand2:#0D56E2; --ink:#111; --muted:#6b7280;
+      --radius:18px; --shadow:0 10px 24px rgba(0,0,0,.08); }
+    *{box-sizing:border-box}
+    html,body{margin:0;font-family:'Noto Sans KR',Pretendard,Segoe UI,Roboto,sans-serif;background:#f6f8fc;color:var(--ink)}
+    a{text-decoration:none;color:inherit}
+
+    header{background:linear-gradient(180deg,var(--brand1),var(--brand2));padding:18px 20px;color:#fff}
+    .header-row{display:flex;align-items:center;gap:14px}
+    .logo-eye{width:72px;aspect-ratio:1/1;overflow:hidden}
+    .logo-eye img{width:100%;display:block}
+    .title-wrap h1{margin:0;font-size:26px;font-weight:900;letter-spacing:-.2px}
+    .title-wrap p{margin:6px 0 0;font-size:14px;color:#eaf1ff;font-weight:600}
+
+    .wrap{max-width:960px;margin:20px auto 100px;padding:0 16px}
+    .back{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:12px;background:#fff;border:1px solid #e8ecf5;box-shadow:var(--shadow)}
+    .back:hover{transform:translateY(-1px);transition:.15s ease}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:16px}
+    .card{background:#fff;border:1px solid #e8ecf5;border-radius:16px;padding:18px;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+    .card h2{margin:0 0 8px;font-size:18px}
+    .muted{color:#64748b;font-size:14px}
+    .btn{display:inline-block;margin-top:10px;padding:10px 14px;border-radius:10px;background:#2A7BF6;color:#fff}
+
+    footer{margin:26px 0 0;color:#64748b;font-size:12px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-row">
+      <div class="logo-eye"><img src="/라이프온로고2.gif" alt="라이프온 로고"></div>
+      <div class="title-wrap">
+        <h1>조합원 혜택 안내</h1>
+        <p>비과세 · 금리우대 · 문화센터 · 제휴혜택</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- 메인으로 돌아가기 (필요 없으면 이 블록 삭제) -->
+    <a class="back" href="/" aria-label="메인으로">
+      ← 메인으로
+    </a>
+
+    <section class="grid">
+      <article class="card">
+        <h2>비과세/금리우대</h2>
+        <p class="muted">조합원 대상 상품에 비과세 혜택 및 금리 우대가 적용됩니다.</p>
+      </article>
+
+      <article class="card">
+        <h2>문화센터 프로그램</h2>
+        <p class="muted">노래교실·라인댄스·요가·필라테스 등 지역 맞춤형 강좌 운영.</p>
+        <a class="btn" href="https://heyzine.com/flip-book/385aa0d3ef.html" target="_blank" rel="noopener">어부바플랜 보기</a>
+      </article>
+
+      <article class="card">
+        <h2>건강검진/제휴 혜택</h2>
+        <p class="muted">지역 병원/상점과의 제휴를 통한 할인 및 포인트 적립 혜택.</p>
+      </article>
+
+      <article class="card">
+        <h2>라이프ON</h2>
+        <p class="muted">신협 생활 혜택을 한 곳에서 편하게.</p>
+        <a class="btn" href="https://ader.naver.com/v1/UOhPt58SgJTO6Az6nXutN0u2pPMjVvaXu89S5MEBUSFXO2v2h9-XfXuZyf32T-L2kHXPTc48V5OPXnjCzZSxs5imeVZ7aD7x4snY9t1UCyqV7T2nGdwtnuA3LnmbapeLjfopGmhijUWKBW7_0O5nV5gS2gNeL2V0BOvUAUfv7AtHRe6tLk5e3vycILZFjgkm-aqGgPvMlF0qZF7_m1UHqD2dGJ5m9VizeqjccsO3_DCj-E-2nV3e9VsBOZsAqq3Jt9N2yk9p2xOIoL2zAVKEJqDUDyVoTh6EvU24hiHFMdyRA3lZJNeiSZpdrT145QtX?c=mnaver.search.brand&t=0" target="_blank" rel="noopener">라이프ON 바로가기</a>
+      </article>
+    </section>
+
+    <footer>※ 실제 혜택 및 조건은 지점/상품에 따라 달라질 수 있습니다.</footer>
+  </main>
+</body>
+</html>
