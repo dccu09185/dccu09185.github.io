@@ -19,26 +19,43 @@
     .title-wrap h1{margin:0;font-size:34px;font-weight:900;letter-spacing:-.2px}
     .title-wrap p{margin:6px 0 0;font-size:16px;color:#eaf1ff;font-weight:600}
 
-    /* ===== 메인 카드 ===== */
-    main{max-width:960px;margin:16px auto 110px;padding:0 16px}
-    .card-list{display:flex;flex-direction:column;gap:16px}
-    .card{
-      display:flex;align-items:center;justify-content:space-between;
-      min-height:120px;padding:22px;border-radius:var(--radius);
-      box-shadow:var(--shadow);color:#fff;position:relative;overflow:hidden;
-      transition:transform .15s ease,filter .15s ease
-    }
-    .card:hover{transform:translateY(-2px);filter:saturate(1.05)}
-    .text{max-width:72%;display:flex;flex-direction:column;justify-content:center}
-    .kicker{opacity:.9;font-size:13px;margin-bottom:6px}
-    .title{font-size:20px;font-weight:800;line-height:1.25;letter-spacing:-.2px}
-    .cta-row{margin-top:10px;font-size:20px;opacity:.9}
-    .emoji{display:flex;justify-content:flex-end;align-items:center;margin-left:12px}
-    .emoji img{width:54px;display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,.15))}
-    .c1{background:linear-gradient(90deg,#3BA0FF,#2F78F6)}
-    .c2{background:linear-gradient(90deg,#10B2B7,#0E7E83)}
-    .c3{background:linear-gradient(90deg,#0F5AD4,#073A8F)}
-    .c4{background:linear-gradient(90deg,#4696FF,#2A7BF6)}
+     /* ===== 메인 카드 ===== */
+  main{max-width:960px;margin:16px auto 110px;padding:0 16px}
+  .card-list{display:flex;flex-direction:column;gap:16px}
+  .card{
+    display:flex;align-items:center;justify-content:space-between;
+    min-height:120px;padding:22px;border-radius:var(--radius);
+    background:#fff;border:1px solid #e8ecf5;
+    box-shadow:var(--shadow);position:relative;overflow:hidden;
+    transition:transform .15s ease,filter .15s ease
+  }
+  .card:hover{transform:translateY(-2px);filter:saturate(1.05)}
+  .text{max-width:72%;display:flex;flex-direction:column;justify-content:center}
+  .kicker{opacity:.95;font-size:13px;margin-bottom:6px}
+  .title{font-size:20px;font-weight:800;line-height:1.25;letter-spacing:-.2px}
+  .cta-row{margin-top:10px;font-size:20px;opacity:.9}
+  .emoji{display:flex;justify-content:flex-end;align-items:center;margin-left:12px}
+  .emoji img{width:54px;display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,.15))}
+
+  /* 카드별 포인트 컬러 지정 */
+  .c1{--accent:#2F78F6;}
+  .c2{--accent:#0E7E83;}
+  .c3{--accent:#073A8F;}
+  .c4{--accent:#2A7BF6;}
+
+  /* 텍스트 컬러 변경 */
+  .c1 .kicker,.c1 .title,.c1 .cta-row{color:var(--accent)}
+  .c2 .kicker,.c2 .title,.c2 .cta-row{color:var(--accent)}
+  .c3 .kicker,.c3 .title,.c3 .cta-row{color:var(--accent)}
+  .c4 .kicker,.c4 .title,.c4 .cta-row{color:var(--accent)}
+
+  /* 왼쪽 컬러 라인(선택사항) */
+  .card::before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:6px;
+    background:var(--accent);opacity:.18;
+    border-top-left-radius:var(--radius);
+    border-bottom-left-radius:var(--radius);
+  }
 
     /* ===== 체크카드 캐러셀 ===== */
     .shelf-wrap{margin-top:28px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}
@@ -51,18 +68,16 @@
     }
     .shelf-btn:active{transform:translateY(1px)}
 
-    /* ✅ 자세히보기 링크(박스) 스타일: 가운데 정렬 + 폭 고정 + 내부에 화살표 */
+    /* ✅ 자세히보기 링크(박스) */
     .more-link{
       font-size:13px;font-weight:700;color:var(--brand2);
-      padding:8px 12px;border:1px solid #dbe4ff;background:#f7faff;border-radius:10px;
-      display:flex;flex-direction:columnalign-items:center;       /* 🔹가로 가운데 */
-  justify-content:center;   /* 🔹세로 가운데 */;gap:6px;
-      width:120px;             /* 폭 고정 */
-      line-height:1.4;text-align:center;white-space:normal;
+      padding:12px;border:1px solid #dbe4ff;background:#f7faff;border-radius:12px;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+      width:130px;line-height:1.35;text-align:center;white-space:normal;
     }
     .more-link:hover{text-decoration:underline}
     .more-text{display:block}
-    .more-arrow{align-self:flex-end;font-size:18px;font-weight:800;line-height:1}
+    .more-arrow{font-size:18px;font-weight:800;line-height:1}
 
     .shelf{
       display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,1fr);
@@ -74,13 +89,10 @@
       scroll-snap-align:start;border:1px solid #e8ecf5;border-radius:16px;overflow:hidden;
       background:#fff;box-shadow:0 6px 16px rgba(0,0,0,.06)
     }
-    /* 세로 카드 이미지 */
     .shelf-card__img{
       height:240px;background:#eef2f9;display:flex;align-items:center;justify-content:center;overflow:hidden;
     }
-    .shelf-card__img img{
-      height:100%;width:auto;object-fit:contain;display:block;border-radius:10px;
-    }
+    .shelf-card__img img{height:100%;width:auto;object-fit:contain;display:block;border-radius:10px}
     .shelf-card__body{padding:12px}
     .shelf-card__title{font-weight:800}
     .shelf-card__desc{font-size:13px;color:#64748b;margin-top:4px;line-height:1.45}
@@ -133,13 +145,21 @@
     .call-item a:hover{background:#f5f8ff}
     .call-item a:active{transform:translateY(1px)}
 
-    @media(max-width:520px){
-      .logo-eye{width:100px}
-      .tab--img .ico{width:36px;height:36px}
-      .tab--home .bubble{width:58px;height:58px}
-      .tab--home .bubble__icon{width:32px;height:32px}
-      .call-fab{right:12px;top:12px}
-      .call-menu{width:240px}
+    /* ===== 푸터 ===== */
+    footer{
+      background:#fff;border-top:1px solid #e9eef6;margin:24px 0 96px; /* 탭바 공간 고려 */
+    }
+    .footer-inner{
+      max-width:960px;margin:0 auto;padding:18px 16px;
+      display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;
+      color:#64748b;font-size:13px;
+    }
+    .footer-brand{display:flex;align-items:center;gap:10px}
+    .footer-brand img{height:28px;width:auto;display:block}
+    .footer-slogan{margin:0;color:#4b5563;font-weight:600}
+    .footer-copy{margin:2px 0 0}
+    @media(min-width:680px){
+      .footer-inner{flex-direction:column}
     }
   </style>
 </head>
@@ -164,17 +184,17 @@
         <div class="call-list">
           <div class="call-item">
             <a href="tel:+82539847414"><div class="call-item__icon">
-              <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.5 2.9 3.8 5.2 6.7 6.7l2.2-2.2c.3-.3.8-.4 1.2-.2 1 .4 2.1.7 3.2.7.7 0 1.2.5 1.2 1.2v3.4c0 .7-.5 1.2-1.2 1.2C10.8 21.8 2.2 13.2 2.2 2.9c0-.7.5-1.2 1.2-1.2H6.8c.7 0 1.2.5 1.2 1.2 0 1.1.2 2.2.7 3.2.2.4.1.9-.2 1.2L6.6 10.8z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.5 2.9 3.8 5.2 6.7 6.7l2.2-2.2c.3-.3.8-.4 1.2-.2 1 .4 2.1.7 3.2.7.7 0 1.2.5 1.2 1.2v3.4c0 .7-.5 1.2-1.2 1.2C10.8 21.8 2.2 13.2 2.2 2.9c0-.7.5-1.2 1.2-1.2H6.8c.7 0 1.2 .5 1.2 1.2 0 1.1.2 2.2.7 3.2.2.4.1.9-.2 1.2L6.6 10.8z"/></svg>
             </div><div class="call-item__text"><span class="label">동촌신협 <b>본점</b></span><span class="num">053-984-7414</span></div></a>
           </div>
           <div class="call-item">
             <a href="tel:+82539440011"><div class="call-item__icon">
-              <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.5 2.9 3.8 5.2 6.7 6.7l2.2-2.2c.3-.3.8-.4 1.2-.2 1 .4 2.1.7 3.2.7.7 0 1.2.5 1.2 1.2v3.4c0 .7-.5 1.2-1.2 1.2C10.8 21.8 2.2 13.2 2.2 2.9c0-.7.5-1.2 1.2-1.2H6.8c.7 0 1.2.5 1.2 1.2 0 1.1.2 2.2.7 3.2.2.4.1.9-.2 1.2L6.6 10.8z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.5 2.9 3.8 5.2 6.7 6.7l2.2-2.2c.3-.3.8-.4 1.2-.2 1 .4 2.1.7 3.2.7.7 0 1.2.5 1.2 1.2v3.4c0 .7-.5 1.2-1.2 1.2C10.8 21.8 2.2 13.2 2.2 2.9c0-.7.5-1.2 1.2-1.2H6.8c.7 0 1.2 .5 1.2 1.2 0 1.1.2 2.2.7 3.2.2.4.1.9-.2 1.2L6.6 10.8z"/></svg>
             </div><div class="call-item__text"><span class="label">동촌신협 <b>대현지점</b></span><span class="num">053-944-0011</span></div></a>
           </div>
           <div class="call-item">
             <a href="tel:+82539647410"><div class="call-item__icon">
-              <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.5 2.9 3.8 5.2 6.7 6.7l2.2-2.2c.3-.3.8-.4 1.2-.2 1 .4 2.1.7 3.2.7.7 0 1.2.5 1.2 1.2v3.4c0 .7-.5 1.2-1.2 1.2C10.8 21.8 2.2 13.2 2.2 2.9c0-.7.5-1.2 1.2-1.2H6.8c.7 0 1.2.5 1.2 1.2 0 1.1.2 2.2.7 3.2.2.4.1.9-.2 1.2L6.6 10.8z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.5 2.9 3.8 5.2 6.7 6.7l2.2-2.2c.3-.3.8-.4 1.2-.2 1 .4 2.1.7 3.2.7.7 0 1.2.5 1.2 1.2v3.4c0 .7-.5 1.2-1.2 1.2C10.8 21.8 2.2 13.2 2.2 2.9c0-.7.5-1.2 1.2-1.2H6.8c.7 0 1.2 .5 1.2 1.2 0 1.1.2 2.2.7 3.2.2.4.1.9-.2 1.2L6.6 10.8z"/></svg>
             </div><div class="call-item__text"><span class="label">동촌신협 <b>안심뉴타운지점</b></span><span class="num">053-964-7410</span></div></a>
           </div>
         </div>
@@ -185,7 +205,6 @@
   <main>
     <!-- 상단 네 가지 안내 카드 -->
     <div class="card-list">
-      <!-- 금리 안내 -->
       <a class="card c1" href="https://blog.naver.com/PostView.naver?blogId=dccu09185&logNo=223047580712&categoryNo=7&parentCategoryNo=&from=thumbnailList" target="_blank" rel="noopener">
         <div class="text">
           <div class="kicker">비과세 혜택으로 이자소득세 1.4% 적용</div>
@@ -195,7 +214,6 @@
         <div class="emoji"><img src="금리.png" alt=""></div>
       </a>
 
-      <!-- 이벤트 안내 -->
       <a class="card c2" href="https://blog.naver.com/PostList.naver?blogId=dccu09185&from=postList&categoryNo=8" target="_blank" rel="noopener">
         <div class="text">
           <div class="kicker">체크카드·출자금·모임통장 등 다양한 이벤트 진행</div>
@@ -205,17 +223,15 @@
         <div class="emoji"><img src="이벤트.png" alt=""></div>
       </a>
 
-      <!-- 혜택 안내: 두번째 페이지 -->
       <a class="card c3" href="/benefits/" target="_blank" rel="noopener">
         <div class="text">
           <div class="kicker">비과세·금리우대·문화센터·건강검진 등 조합원 전용</div>
           <div class="title">혜택 안내</div>
           <div class="cta-row">→</div>
         </div>
-        <div class="emoji"><img src="1.png" alt=""></div>
+        <div class="emoji"><img src="혜택.png" alt=""></div>
       </a>
 
-      <!-- 어부바플랜 -->
       <a class="card c4" href="https://heyzine.com/flip-book/385aa0d3ef.html" target="_blank" rel="noopener">
         <div class="text">
           <div class="kicker">지역 소상공인과 함께하는 상생 프로그램</div>
@@ -237,85 +253,49 @@
       </div>
 
       <div class="shelf" id="cardShelf">
-        <!-- 1. 신협어부바 체크카드 -->
         <article class="shelf-card">
-          <div class="shelf-card__img">
-            <img src="어부바.png" alt="신협어부바 체크카드">
-          </div>
+          <div class="shelf-card__img"><img src="어부바.png" alt="신협어부바 체크카드"></div>
           <div class="shelf-card__body">
             <div class="shelf-card__title">신협어부바 체크카드</div>
-            <div class="shelf-card__desc">
-              · 화요일 10% (편의점·커피·패스트푸드)<br>
-              · 도서·로드샵·렌터카 5%<br>
-              · 영화·응시료·통신요금 각 3,000원 캐시백
-            </div>
+            <div class="shelf-card__desc">· 화요일 10% (편의점·커피·패스트푸드)<br>· 도서·로드샵·렌터카 5%<br>· 영화·응시료·통신요금 각 3,000원 캐시백</div>
           </div>
         </article>
 
-        <!-- 2. 장보고 체크카드 -->
         <article class="shelf-card">
-          <div class="shelf-card__img">
-            <img src="장보고.png" alt="장보고 체크카드">
-          </div>
+          <div class="shelf-card__img"><img src="장보고.png" alt="장보고 체크카드"></div>
           <div class="shelf-card__body">
             <div class="shelf-card__title">장보고 체크카드</div>
-            <div class="shelf-card__desc">
-              · 전통시장/하나로마트 <br>
-              · 영화·커피·통신비 <br>
-              ※ 건당 1만원 이상 결제 시 2,000원 캐시백
-            </div>
+            <div class="shelf-card__desc">· 전통시장/하나로마트 <br>· 영화·커피·통신비 <br>※ 건당 1만원 이상 결제 시 2,000원 캐시백</div>
           </div>
         </article>
 
-        <!-- 3. 세로움 체크카드 -->
         <article class="shelf-card">
-          <div class="shelf-card__img">
-            <img src="세로움.png" alt="세로움 체크카드">
-          </div>
+          <div class="shelf-card__img"><img src="세로움.png" alt="세로움 체크카드"></div>
           <div class="shelf-card__body">
             <div class="shelf-card__title">세로움 체크카드</div>
-            <div class="shelf-card__desc">
-              · 1만원 이상 0.2% 캐시백<br>
-              · 5만원 이상 0.5% 캐시백<br>
-              · 국세·지방세 0.2% 캐시백
-            </div>
+            <div class="shelf-card__desc">· 1만원 이상 0.2% 캐시백<br>· 5만원 이상 0.5% 캐시백<br>· 국세·지방세 0.2% 캐시백</div>
           </div>
         </article>
 
-        <!-- 4. 귀여워 체크카드 -->
         <article class="shelf-card">
-          <div class="shelf-card__img">
-            <img src="귀여워.png" alt="귀여워 체크카드">
-          </div>
+          <div class="shelf-card__img"><img src="귀여워.png" alt="귀여워 체크카드"></div>
           <div class="shelf-card__body">
             <div class="shelf-card__title">귀여워 체크카드</div>
-            <div class="shelf-card__desc">
-              · 700~6,999원 결제 70원 캐시백<br>
-              · 7,000원 이상 700원 캐시백 (월 7회)
-            </div>
+            <div class="shelf-card__desc">· 700~6,999원 결제 70원 캐시백<br>· 7,000원 이상 700원 캐시백 (월 7회)</div>
           </div>
         </article>
 
-        <!-- 5. Cubig SIMPLE 하이브리드 -->
         <article class="shelf-card">
-          <div class="shelf-card__img">
-            <img src="하이브리드.png" alt="Cubig SIMPLE 하이브리드">
-          </div>
+          <div class="shelf-card__img"><img src="하이브리드.png" alt="Cubig SIMPLE 하이브리드"></div>
           <div class="shelf-card__body">
             <div class="shelf-card__title">Cubig SIMPLE 하이브리드</div>
-            <div class="shelf-card__desc">
-              1만원 이상 0.3% 캐시백<br>
-              5만원 이상 0.5% 캐시백<br>
-              주말/공휴일 0.1% 추가 캐시백
-            </div>
+            <div class="shelf-card__desc">1만원 이상 0.3% 캐시백<br>5만원 이상 0.5% 캐시백<br>주말/공휴일 0.1% 추가 캐시백</div>
           </div>
         </article>
 
-        <!-- 👉 오른쪽 ‘체크카드 자세히보기’ 카드 (박스 내부에 화살표 포함) -->
+        <!-- 자세히보기 카드 -->
         <article class="shelf-card shelf-more">
-          <a class="more-link"
-             href="https://www.cu.co.kr/product/ad/card/selectCardList.do?mi=100253&searchCardTyCode=check"
-             target="_blank" rel="noopener">
+          <a class="more-link" href="https://www.cu.co.kr/product/ad/card/selectCardList.do?mi=100253&searchCardTyCode=check" target="_blank" rel="noopener">
             <span class="more-text">체크카드<br>자세히보기</span>
             <span class="more-arrow" aria-hidden="true">→</span>
           </a>
