@@ -166,6 +166,39 @@
     .footer-slogan{margin:0;color:#4b5563;font-weight:600}
     .footer-copy{margin:2px 0 0}
     @media(min-width:680px){.footer-inner{flex-direction:column}}
+ 
+    /* ===== SNS 트리거 hover 애니메이션 ===== */
+
+/* 트리거 자체가 살짝 떠오름 */
+.sns-trigger{
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.tab--sns .ico:hover .sns-trigger{
+  transform: translateY(-2px);
+  box-shadow:0 8px 18px rgba(0,0,0,.12);
+  border-color:#d7e6ff;
+}
+
+/* 햄버거 줄 미세 파동 */
+.sns-trigger span{
+  transition: transform .2s ease, opacity .2s ease;
+}
+.tab--sns .ico:hover .sns-trigger span:nth-child(1){ transform: translateY(-1px); }
+.tab--sns .ico:hover .sns-trigger span:nth-child(3){ transform: translateY(1px); }
+
+/* 메뉴가 열린 상태에서도 강조 유지 */
+.tab--sns.active .sns-trigger{
+  transform: translateY(-2px);
+  box-shadow:0 8px 18px rgba(0,0,0,.12);
+  border-color:#cfe0ff;
+}
+
+/* 키보드 포커스 접근성 */
+.sns-trigger:focus-visible{
+  outline:2px solid #9cc3ff;
+  outline-offset:2px;
+}
+
   </style>
 </head>
 <body>
@@ -334,13 +367,13 @@
       </a>
     </div>
     <div class="sns-item">
-      <a href="https://www.instagram.com/여기에_계정" target="_blank" rel="noopener" role="menuitem">
+      <a href="https://www.instagram.com/cu_dongchon/" target="_blank" rel="noopener" role="menuitem">
         <div class="sns-ico"><img src="인스타.png" alt=""></div>
         <div class="label">인스타그램</div>
       </a>
     </div>
     <div class="sns-item">
-      <a href="https://www.facebook.com/여기에_페이지" target="_blank" rel="noopener" role="menuitem">
+      <a href="https://www.facebook.com/people/동촌신용협동조합/100067500560086/#" target="_blank" rel="noopener" role="menuitem">
         <div class="sns-ico"><img src="페이스북.png" alt=""></div>
         <div class="label">페이스북</div>
       </a>
